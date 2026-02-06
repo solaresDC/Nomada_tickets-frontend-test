@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  
+  <!-- SEO Meta Tags -->
+  <title>Complete Purchase - Nomada Tickets</title>
+  <meta name="description" content="Complete your secure ticket purchase for Nomada.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nomadatickets.com/page3.html">
+  <meta property="og:title" content="Complete Purchase - Nomada Tickets">
+  <meta property="og:description" content="Complete your secure ticket purchase for Nomada.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body id="Page3_Body" class="page-payment">
+  
+  <!-- Skip to Main Content (Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  
+  <!-- Header -->
+  <header id="App_Header" class="header">
+    <div class="header-inner">
+      <!-- Logo -->
+      <div class="header-logo">
+        <a href="index.html" class="header-logo-link" aria-label="Nomada Tickets Home">
+          <div id="Header_ImageContainer">
+            <img 
+              id="Header_Image" 
+              class="header-image" 
+              src="images/header-logo.jpg" 
+              alt="Nomada Tickets Logo"
+              width="150"
+              height="50"
+            >
+          </div>
+          <span id="Header_BylineText" class="header-byline">by Nómada</span>
+        </a>
+      </div>
+      
+      <!-- Language Selector -->
+      <div class="language-selector">
+        <button 
+          id="Header_LanguageButton" 
+          class="language-button"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          aria-label="Select language"
+        >
+          <span>EN</span>
+          <svg class="language-button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        
+        <div 
+          id="Header_LanguageDropdown" 
+          class="language-dropdown"
+          role="listbox"
+          aria-label="Language options"
+        >
+          <button 
+            id="Header_LanguageOption_EN" 
+            class="language-option"
+            role="option"
+            aria-selected="true"
+          >
+            <span class="language-option-flag">🇺🇸</span>
+            <span>English</span>
+          </button>
+          <button 
+            id="Header_LanguageOption_ES" 
+            class="language-option"
+            role="option"
+            aria-selected="false"
+          >
+            <span class="language-option-flag">🇪🇸</span>
+            <span>Español</span>
+          </button>
+          <button 
+            id="Header_LanguageOption_PTBR" 
+            class="language-option"
+            role="option"
+            aria-selected="false"
+          >
+            <span class="language-option-flag">🇧🇷</span>
+            <span>Português</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main id="main" class="main">
+    <section class="payment-section">
+      <div class="container">
+        <div class="payment-container">
+          
+          <!-- Back Link -->
+          <a href="page2.html" id="backLink" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Back to ticket selection
+          </a>
+          
+          <!-- Title -->
+          <h1 id="Page3_TitleText" class="payment-title">Complete Your Purchase</h1>
+          
+          <!-- Payment Card -->
+          <div id="Page3_PaymentContainer" class="payment-card">
+            
+            <!-- Order Summary -->
+            <div class="order-summary">
+              <h2 id="orderSummaryTitle" class="order-summary-title">Order Summary</h2>
+              
+              <!-- Female Tickets Row -->
+              <div id="femaleTicketsRow" class="order-line" style="display: none;">
+                <span id="femaleTicketsLabel">Female Tickets</span>
+                <span>
+                  <span id="femaleQtyDisplay">0 × $1.00</span>
+                  <span id="femaleSubtotal">$0.00</span>
+                </span>
+              </div>
+              
+              <!-- Male Tickets Row -->
+              <div id="maleTicketsRow" class="order-line" style="display: none;">
+                <span id="maleTicketsLabel">Male Tickets</span>
+                <span>
+                  <span id="maleQtyDisplay">0 × $2.00</span>
+                  <span id="maleSubtotal">$0.00</span>
+                </span>
+              </div>
+              
+              <!-- Subtotal -->
+              <div class="order-line">
+                <span id="subtotalLabel">Subtotal</span>
+                <span id="subtotalAmount">$0.00</span>
+              </div>
+              
+              <!-- Processing Fee -->
+              <div class="order-line">
+                <span id="feeLabel">Processing Fee</span>
+                <span id="feeAmount">$0.00</span>
+              </div>
+              
+              <!-- Total -->
+              <div class="order-line total">
+                <span id="totalLabel">Total</span>
+                <span id="totalAmount">$0.00 CAD</span>
+              </div>
+            </div>
+            
+            <!-- Stripe Payment Element -->
+            <div class="stripe-element-container">
+              <div id="Page3_StripePaymentElementMount">
+                <!-- Stripe Payment Element will be mounted here -->
+                <div class="stripe-loading">
+                  <div class="stripe-loading-spinner"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Terms Section -->
+            <div id="Page3_TermsSection" class="terms-section">
+              <label class="terms-wrapper">
+                <input 
+                  type="checkbox" 
+                  id="Page3_TermsCheckbox" 
+                  class="terms-checkbox"
+                >
+                <span class="terms-checkbox-custom"></span>
+                <span id="Page3_TermsText" class="terms-text">
+                  I agree to the <a href="#" onclick="return false;">Terms and Conditions</a>
+                </span>
+              </label>
+              <p id="Page3_TermsWarningText" class="terms-warning">
+                You must accept the terms and conditions to continue.
+              </p>
+            </div>
+            
+            <!-- Payment Error -->
+            <div id="paymentError" class="payment-error">
+              Something went wrong. Please try again.
+            </div>
+            
+            <!-- Pay Button -->
+            <div class="pay-button-container">
+              <button id="Page3_PayButton" class="btn btn-pay" disabled>
+                Pay Now
+              </button>
+            </div>
+            
+            <!-- Secure Badge -->
+            <div class="secure-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg>
+              <span id="secureBadgeText">Secure payment powered by Stripe</span>
+            </div>
+            
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Processing Modal Backdrop -->
+  <div id="processingModalBackdrop" class="modal-backdrop"></div>
+  
+  <!-- Processing Modal -->
+  <div id="Page3_ProcessingModal" class="modal modal-processing" role="dialog" aria-modal="true" aria-labelledby="processingTitle">
+    <div class="modal-body">
+      <div id="Page3_LoadingIndicator" class="loading-spinner"></div>
+      <h2 id="processingTitle" class="loading-text">Processing Payment</h2>
+      <p id="processingText" class="modal-text">Please wait while we confirm your payment...</p>
+    </div>
+  </div>
+  
+  <!-- Success Modal Backdrop -->
+  <div id="successModalBackdrop" class="modal-backdrop"></div>
+  
+  <!-- Success Modal -->
+  <div id="Page3_SuccessModal" class="modal modal-success" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+    <div class="modal-header">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2 id="successTitle" class="modal-title">Payment Successful!</h2>
+    </div>
+    <div class="modal-body">
+      <p id="Page3_SuccessMessage" class="modal-text">
+        Your tickets have been confirmed. Show this QR code at the entrance.
+      </p>
+      
+      <!-- QR Code -->
+      <div class="qr-code-container">
+        <img 
+          id="Page3_QRCodeImage" 
+          class="qr-code-image" 
+          src="" 
+          alt="Ticket QR Code"
+        >
+        <p id="qrCaption" class="qr-code-caption">Your Ticket QR Code</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button id="Page3_SuccessContinueButton" class="btn btn-primary btn-block">
+        Back to Home
+      </button>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p id="footerCopyright" class="footer-copyright">
+        © 2026 Nómada. All rights reserved.
+      </p>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/pages/page3.js"></script>
+  
+</body>
+</html>

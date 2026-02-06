@@ -1,0 +1,107 @@
+# Nomada Tickets Frontend
+
+Premium nightlife ticket sales platform frontend built with vanilla HTML, CSS, and JavaScript.
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+ installed
+- Backend API running (locally or deployed)
+
+### Installation
+
+1. Navigate to the frontend directory:
+```bash
+   cd frontend
+```
+
+2. Install dependencies:
+```bash
+   npm install
+```
+
+3. Configure the application:
+   - Open `public/js/config/index.js`
+   - Update `BACKEND_URL` to your backend URL
+   - Update `STRIPE_PUBLISHABLE_KEY` with your Stripe publishable key
+
+4. Start the development server:
+```bash
+   npm run dev
+```
+
+5. Open your browser to: `http://localhost:5500`
+
+## Project Structure
+```
+frontend/
+├── public/                 # Static files (deployed to Cloudflare)
+│   ├── index.html         # Page 1 - Landing page
+│   ├── page2.html         # Page 2 - Ticket selection
+│   ├── page3.html         # Page 3 - Payment
+│   ├── css/               # Stylesheets
+│   │   ├── base/          # Reset, variables, typography
+│   │   ├── components/    # Buttons, forms, modals
+│   │   ├── layout/        # Header, footer, grid
+│   │   ├── pages/         # Page-specific styles
+│   │   ├── utilities/     # Helper classes
+│   │   └── main.css       # Main entry point
+│   ├── js/                # JavaScript modules
+│   │   ├── config/        # Configuration
+│   │   ├── utils/         # Utilities (DOM, storage, validation, API)
+│   │   ├── services/      # API client, Stripe integration
+│   │   ├── components/    # Reusable components
+│   │   ├── pages/         # Page-specific logic
+│   │   ├── i18n/          # Translations
+│   │   └── main.js        # Entry point
+│   └── images/            # Optimized images
+├── docs/                  # Documentation
+├── package.json           # Dependencies
+└── .gitignore
+```
+
+## Pages
+
+### Page 1 (index.html) - Landing Page
+- Hero section with CTA
+- Features grid
+- Banner button for events
+
+### Page 2 (page2.html) - Ticket Selection
+- Quantity selectors for male/female tickets
+- Validation (at least one ticket required)
+- Warning modal before proceeding
+
+### Page 3 (page3.html) - Payment
+- Order summary
+- Stripe Payment Element
+- Terms and conditions checkbox
+- Processing and success modals with QR code
+
+## Features
+
+- **Multi-language support**: English, Spanish, Portuguese (Brazil)
+- **Responsive design**: Mobile-first, works on all devices
+- **Accessible**: Keyboard navigation, screen reader friendly
+- **Secure**: XSS prevention, URL validation, Stripe security
+- **Fast**: System fonts, optimized CSS, lazy loading
+
+## Configuration
+
+Edit `public/js/config/index.js`:
+```javascript
+export const CONFIG = {
+  BACKEND_URL: 'https://your-backend-url.com',
+  STRIPE_PUBLISHABLE_KEY: 'pk_test_your_key_here',
+  // ...
+};
+```
+
+## Deployment
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for Cloudflare Pages instructions.
+
+## Troubleshooting
+
+See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for common issues.

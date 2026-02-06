@@ -1,0 +1,36 @@
+/**
+ * Main CSS Entry Point
+ * Imports all CSS modules in the correct order
+ * 
+ * Order matters:
+ * 1. Reset (normalize browser defaults)
+ * 2. Variables (CSS custom properties)
+ * 3. Typography (base text styles)
+ * 4. Layout (header, footer, grid)
+ * 5. Components (buttons, forms, modals)
+ * 6. Pages (page-specific styles)
+ * 7. Utilities (helper classes - last to override)
+ */
+
+/* Base Styles */
+@import url('./base/reset.css');
+@import url('./base/variables.css');
+@import url('./base/typography.css');
+
+/* Layout */
+@import url('./layout/header.css');
+@import url('./layout/footer.css');
+@import url('./layout/grid.css');
+
+/* Components */
+@import url('./components/buttons.css');
+@import url('./components/forms.css');
+@import url('./components/modals.css');
+
+/* Page-Specific Styles */
+@import url('./pages/index.css');
+@import url('./pages/page2.css');
+@import url('./pages/page3.css');
+
+/* Utilities (last - highest specificity for overrides) */
+@import url('./utilities/helpers.css');

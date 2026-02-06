@@ -1,0 +1,14 @@
+{
+  "name": "nomada-tickets-frontend",
+  "version": "1.0.0",
+  "description": "Nomada Tickets - Premium Nightlife Experience",
+  "scripts": {
+    "dev": "live-server public/ --port=5500 --host=localhost",
+    "start": "live-server public/ --port=5500 --host=localhost"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "author": "Nomada",
+  "license": "MIT"
+}

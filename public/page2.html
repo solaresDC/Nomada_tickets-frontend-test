@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  
+  <!-- SEO Meta Tags -->
+  <title>Select Tickets - Nomada Tickets</title>
+  <meta name="description" content="Select your tickets for an unforgettable night with Nomada.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nomadatickets.com/page2.html">
+  <meta property="og:title" content="Select Tickets - Nomada Tickets">
+  <meta property="og:description" content="Select your tickets for an unforgettable night with Nomada.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body id="Page2_Body" class="page-tickets">
+  
+  <!-- Skip to Main Content (Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  
+  <!-- Header -->
+  <header id="App_Header" class="header">
+    <div class="header-inner">
+      <!-- Logo -->
+      <div class="header-logo">
+        <a href="index.html" class="header-logo-link" aria-label="Nomada Tickets Home">
+          <div id="Header_ImageContainer">
+            <img 
+              id="Header_Image" 
+              class="header-image" 
+              src="images/header-logo.jpg" 
+              alt="Nomada Tickets Logo"
+              width="150"
+              height="50"
+            >
+          </div>
+          <span id="Header_BylineText" class="header-byline">by Nómada</span>
+        </a>
+      </div>
+      
+      <!-- Language Selector -->
+      <div class="language-selector">
+        <button 
+          id="Header_LanguageButton" 
+          class="language-button"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          aria-label="Select language"
+        >
+          <span>EN</span>
+          <svg class="language-button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        
+        <div 
+          id="Header_LanguageDropdown" 
+          class="language-dropdown"
+          role="listbox"
+          aria-label="Language options"
+        >
+          <button 
+            id="Header_LanguageOption_EN" 
+            class="language-option"
+            role="option"
+            aria-selected="true"
+          >
+            <span class="language-option-flag">🇺🇸</span>
+            <span>English</span>
+          </button>
+          <button 
+            id="Header_LanguageOption_ES" 
+            class="language-option"
+            role="option"
+            aria-selected="false"
+          >
+            <span class="language-option-flag">🇪🇸</span>
+            <span>Español</span>
+          </button>
+          <button 
+            id="Header_LanguageOption_PTBR" 
+            class="language-option"
+            role="option"
+            aria-selected="false"
+          >
+            <span class="language-option-flag">🇧🇷</span>
+            <span>Português</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main id="main" class="main">
+    <section class="ticket-section">
+      <div class="container">
+        <div class="ticket-container">
+          
+          <!-- Title -->
+          <h1 id="Page2_TitleText" class="ticket-title">
+            Select Your <span class="highlight">Tickets</span>
+          </h1>
+          <p id="ticketSubtitle" class="ticket-subtitle">
+            Choose the number of tickets you need
+          </p>
+          
+          <!-- Gender Indicator -->
+          <div id="Page2_GenderIndicator" class="gender-indicator">
+            <div class="indicator-item">
+              <div id="Page2_FemaleIconSquare" class="indicator-icon female">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="8" r="5"/>
+                  <path d="M12 13v8M9 18h6"/>
+                </svg>
+              </div>
+              <span id="Page2_FemaleCounterSquare" class="indicator-count">0</span>
+            </div>
+            <div class="indicator-item">
+              <div id="Page2_MaleIconSquare" class="indicator-icon male">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="10" cy="14" r="5"/>
+                  <path d="M21 3l-6 6M21 3h-5M21 3v5"/>
+                </svg>
+              </div>
+              <span id="Page2_MaleCounterSquare" class="indicator-count">0</span>
+            </div>
+          </div>
+          
+          <!-- Quantity Card -->
+          <div class="quantity-card">
+            
+            <!-- Female Row -->
+            <div id="Page2_FemaleRow" class="quantity-row">
+              <div class="quantity-info">
+                <div class="quantity-icon female">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="8" r="5"/>
+                    <path d="M12 13v8M9 18h6"/>
+                  </svg>
+                </div>
+                <div>
+                  <div id="femaleLabelText" class="quantity-label">Female</div>
+                  <div id="femalePriceText" class="quantity-price">$1.00 CAD</div>
+                </div>
+              </div>
+              <div class="quantity-controls">
+                <button 
+                  id="Page2_FemaleMinusButton" 
+                  class="btn btn-quantity"
+                  aria-label="Decrease female tickets"
+                  disabled
+                >
+                  −
+                </button>
+                <input 
+                  id="Page2_FemaleQuantityBox" 
+                  type="text" 
+                  class="quantity-display" 
+                  value="0" 
+                  readonly
+                  aria-label="Female ticket quantity"
+                >
+                <button 
+                  id="Page2_FemalePlusButton" 
+                  class="btn btn-quantity"
+                  aria-label="Increase female tickets"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            
+            <!-- Male Row -->
+            <div id="Page2_MaleRow" class="quantity-row">
+              <div class="quantity-info">
+                <div class="quantity-icon male">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="10" cy="14" r="5"/>
+                    <path d="M21 3l-6 6M21 3h-5M21 3v5"/>
+                  </svg>
+                </div>
+                <div>
+                  <div id="maleLabelText" class="quantity-label">Male</div>
+                  <div id="malePriceText" class="quantity-price">$2.00 CAD</div>
+                </div>
+              </div>
+              <div class="quantity-controls">
+                <button 
+                  id="Page2_MaleMinusButton" 
+                  class="btn btn-quantity"
+                  aria-label="Decrease male tickets"
+                  disabled
+                >
+                  −
+                </button>
+                <input 
+                  id="Page2_MaleQuantityBox" 
+                  type="text" 
+                  class="quantity-display" 
+                  value="0" 
+                  readonly
+                  aria-label="Male ticket quantity"
+                >
+                <button 
+                  id="Page2_MalePlusButton" 
+                  class="btn btn-quantity"
+                  aria-label="Increase male tickets"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            
+          </div>
+          
+          <!-- Error Message -->
+          <div id="Page2_QuantityErrorText" class="quantity-error">
+            Please select at least one ticket to continue.
+          </div>
+          
+          <!-- Continue Button -->
+          <div class="continue-container">
+            <button id="Page2_ContinueButton" class="btn btn-primary btn-block btn-lg">
+              Continue
+            </button>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Warning Modal Backdrop -->
+  <div id="warningModalBackdrop" class="modal-backdrop"></div>
+  
+  <!-- Warning Modal -->
+  <div id="Page2_WarningModal" class="modal modal-warning" role="dialog" aria-modal="true" aria-labelledby="Page2_WarningTitle">
+    <div class="modal-header">
+      <h2 id="Page2_WarningTitle" class="modal-title">Important Information</h2>
+    </div>
+    <div class="modal-body">
+      <p id="Page2_WarningTextBox" class="modal-text">
+        By continuing, you confirm that you are at least 19 years of age and agree to our terms and conditions. Tickets are non-refundable. Please ensure your selection is correct before proceeding to payment.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button id="Page2_WarningContinueButton" class="btn btn-primary btn-block">
+        I Understand, Continue
+      </button>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p id="footerCopyright" class="footer-copyright">
+        © 2026 Nómada. All rights reserved.
+      </p>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/pages/page2.js"></script>
+  
+</body>
+</html>

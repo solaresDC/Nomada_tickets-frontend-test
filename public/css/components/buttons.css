@@ -1,0 +1,198 @@
+/**
+ * Button Styles
+ * All button variants for Nomada Tickets
+ * Primary, Secondary, Icon buttons with hover/active states
+ */
+
+/* Base Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: 1rem 2.5rem;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--border-radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  min-height: var(--touch-target-min);
+  user-select: none;
+}
+
+.btn:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Primary Button - Cyan/Blue Gradient */
+.btn-primary {
+  background: var(--gradient-cyan-blue);
+  color: var(--color-primary-dark);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 217, 255, 0.5);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
+}
+
+/* Secondary Button - Transparent with Border */
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-text-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-text-primary);
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Ghost Button - Minimal */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-primary);
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--color-bg-card);
+}
+
+/* Icon Button - Circular */
+.btn-icon {
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
+  padding: 0;
+  border-radius: var(--border-radius-circle);
+  background: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.btn-icon:hover:not(:disabled) {
+  background: var(--gradient-cyan-blue);
+  color: var(--color-primary-dark);
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.btn-icon:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Quantity Button - Plus/Minus */
+.btn-quantity {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border-radius: var(--border-radius-circle);
+  background: var(--gradient-cyan-blue);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.btn-quantity:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5);
+}
+
+.btn-quantity:active:not(:disabled) {
+  transform: translateY(-1px) scale(1);
+}
+
+/* Large Button */
+.btn-lg {
+  padding: 1.25rem 3rem;
+  font-size: var(--font-size-lg);
+}
+
+/* Small Button */
+.btn-sm {
+  padding: 0.5rem 1.5rem;
+  font-size: var(--font-size-sm);
+  min-height: 36px;
+}
+
+/* Full Width Button */
+.btn-block {
+  width: 100%;
+}
+
+/* Button with Icon */
+.btn-with-icon {
+  gap: var(--spacing-sm);
+}
+
+.btn-with-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Banner Button - Nearly Full Width */
+.btn-banner {
+  width: 100%;
+  max-width: 600px;
+  padding: 1.5rem 2rem;
+  background: var(--gradient-fire);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-glow-fire);
+}
+
+.btn-banner:hover:not(:disabled) {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(255, 102, 0, 0.5);
+}
+
+.btn-banner:active:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+/* Pay Button - Special Styling */
+.btn-pay {
+  width: 100%;
+  padding: 1.25rem 2rem;
+  background: var(--gradient-cyan-blue);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.btn-pay:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 217, 255, 0.6);
+}
+
+.btn-pay:active:not(:disabled) {
+  transform: translateY(0);
+}
