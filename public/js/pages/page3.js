@@ -67,9 +67,39 @@ export async function initPage3() {
  * Handle language change
  * @param {string} lang - New language code
  */
-function onLanguageChange(lang) {
+async function onLanguageChange(lang) {
   console.log('[Page3] Language changed to:', lang);
   applyTranslations(lang);
+  
+  // Stripe Elements don't support locale change — must destroy and recreate
+  if (clientSecret) {
+    const stripeContainer = getElementById('Page3_StripePaymentElementMount');
+    const payBtn = getElementById('Page3_PayButton');
+    
+    // Destroy current element
+    if (paymentElement) {
+      paymentElement.unmount();
+      paymentElement = null;
+    }
+    
+    // Show loading
+    if (stripeContainer) {
+      stripeContainer.innerHTML = '<div class="stripe-loading"><div class="stripe-loading-spinner"></div></div>';
+    }
+    if (payBtn) payBtn.disabled = true;
+    
+    // Recreate with new locale (reuses existing clientSecret — no new API call)
+    const stripeResult = await createElements(clientSecret, lang);
+    stripe = stripeResult.stripe;
+    elements = stripeResult.elements;
+    
+    if (stripeContainer) stripeContainer.innerHTML = '';
+    
+    paymentElement = mountPaymentElement(elements, 'Page3_StripePaymentElementMount');
+    paymentElement.on('ready', () => {
+      if (payBtn) payBtn.disabled = false;
+    });
+  }
 }
 
 /**
@@ -267,7 +297,7 @@ async function initializePayment(lang) {
     
     // Initialize Stripe Elements
     console.log('[Page3] Initializing Stripe Elements...');
-    const stripeResult = await createElements(clientSecret);
+    const stripeResult = await createElements(clientSecret, lang);
     stripe = stripeResult.stripe;
     elements = stripeResult.elements;
     

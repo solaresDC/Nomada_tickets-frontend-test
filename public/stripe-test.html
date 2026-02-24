@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stripe Element Test</title>
+  <style>
+    body {
+      background: #2a003b;
+      color: white;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .stripe-box {
+      background: rgba(255,255,255,0.95);
+      border-radius: 12px;
+      padding: 24px;
+      min-height: 350px;
+    }
+    #stripe-mount {
+      min-height: 300px;
+    }
+    .status {
+      margin-top: 20px;
+      padding: 12px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .status.error { border-left: 4px solid red; }
+    .status.success { border-left: 4px solid #00d9ff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Stripe Payment Element Test</h1>
+    <p>This page tests if Stripe Elements can mount correctly.</p>
+    
+    <div class="stripe-box">
+      <div id="stripe-mount">
+        <p style="color: #999;">Loading Stripe...</p>
+      </div>
+    </div>
+    
+    <div id="status" class="status">Initializing...</div>
+  </div>
+
+  <script>
+    const BACKEND_URL = 'https://nomada-tickets-com-test.onrender.com';
+    const STRIPE_PUBLISHABLE_KEY = 'pk_test_51SpBLRGV3cwb7LAj1gLl1Eod4hW32LpxeCKXRvzur1uKmF0AlcnF73E6hVi8EFQy0MKZiwpX5g7YzHEApLfvTMiZ00LqKdNzaG';
+    
+    const statusEl = document.getElementById('status');
+    
+    function log(msg, isError = false) {
+      console.log(msg);
+      statusEl.textContent = msg;
+      statusEl.className = isError ? 'status error' : 'status success';
+    }
+
+    async function test() {
+      try {
+        // Step 1: Load Stripe.js
+        log('Step 1: Loading Stripe.js...');
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://js.stripe.com/v3/';
+          script.onload = resolve;
+          script.onerror = () => reject(new Error('Failed to load Stripe.js'));
+          document.head.appendChild(script);
+        });
+        log('Step 1: Stripe.js loaded ✓');
+
+        // Step 2: Create PaymentIntent
+        log('Step 2: Creating PaymentIntent...');
+        const response = await fetch(`${BACKEND_URL}/api/checkout/create-intent`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ femaleQty: 1, maleQty: 1, language: 'en' })
+        });
+        
+        if (!response.ok) {
+          const err = await response.text();
+          throw new Error(`API error ${response.status}: ${err}`);
+        }
+        
+        const data = await response.json();
+        log(`Step 2: PaymentIntent created: ${data.paymentIntentId} ✓`);
+
+        // Step 3: Initialize Stripe
+        log('Step 3: Initializing Stripe...');
+        const stripe = window.Stripe(STRIPE_PUBLISHABLE_KEY);
+        log('Step 3: Stripe initialized ✓');
+
+        // Step 4: Create Elements
+        log('Step 4: Creating Elements...');
+        const elements = stripe.elements({
+          clientSecret: data.clientSecret,
+          appearance: {
+            theme: 'stripe',
+            variables: {
+              colorPrimary: '#00d9ff',
+              colorBackground: '#ffffff',
+              colorText: '#1a1a2e',
+            }
+          }
+        });
+        log('Step 4: Elements created ✓');
+
+        // Step 5: Mount Payment Element
+        log('Step 5: Mounting Payment Element...');
+        const mountEl = document.getElementById('stripe-mount');
+        mountEl.innerHTML = ''; // Clear loading text
+        
+        const paymentElement = elements.create('payment', {
+          layout: { type: 'tabs', defaultCollapsed: false }
+        });
+        
+        paymentElement.mount('#stripe-mount');
+        log('Step 5: Payment Element mounted ✓');
+
+        // Step 6: Wait for ready event
+        paymentElement.on('ready', () => {
+          log('Step 6: Payment Element READY ✓ — It works!');
+        });
+
+        paymentElement.on('loaderror', (event) => {
+          log(`LOAD ERROR: ${JSON.stringify(event)}`, true);
+        });
+
+      } catch (err) {
+        log(`ERROR: ${err.message}`, true);
+        console.error('Full error:', err);
+      }
+    }
+
+    test();
+  </script>
+</body>
+</html>

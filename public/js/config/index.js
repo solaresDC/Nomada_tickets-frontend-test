@@ -16,7 +16,7 @@ export const CONFIG = {
   // Stripe Configuration
   // This is the PUBLISHABLE key - safe for frontend
   // Get this from: https://dashboard.stripe.com/test/apikeys
-  STRIPE_PUBLISHABLE_KEY: 'pk_test_51SpBLCGdj6SAdp6oLGJ8zP5Kzhym1brfJlLQWTh1NtkOIWAHCNRrvEsvK5pZK4hakojlZTPefy70w8lC1GTWZQb500LMybWaK6',
+  STRIPE_PUBLISHABLE_KEY: 'pk_test_51SpBLRGV3cwb7LAj1gLl1Eod4hW32LpxeCKXRvzur1uKmF0AlcnF73E6hVi8EFQy0MKZiwpX5g7YzHEApLfvTMiZ00LqKdNzaG',
   
   // App Settings
   APP_NAME: 'Nomada Tickets',

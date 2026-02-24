@@ -82,12 +82,18 @@ export async function initializeStripe() {
  * @param {string} clientSecret - PaymentIntent client secret
  * @returns {Promise<{stripe: Stripe, elements: StripeElements}>}
  */
-export async function createElements(clientSecret) {
+export async function createElements(clientSecret, locale = 'auto') {
   const stripe = await initializeStripe();
   
-  // Create Elements instance with appearance options
+  const stripeLocaleMap = {
+    'en': 'en',
+    'es': 'es',
+    'pt-BR': 'pt-BR'
+  };
+  
   elementsInstance = stripe.elements({
     clientSecret,
+    locale: stripeLocaleMap[locale] || 'auto',
     appearance: {
       theme: 'stripe',
       variables: {
