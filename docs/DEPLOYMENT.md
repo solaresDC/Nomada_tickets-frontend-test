@@ -48,7 +48,7 @@ Use these settings:
 | Production branch | `main` |
 | Framework preset | None |
 | Build command | (leave empty) |
-| Build output directory | `frontend/public` |
+| Build output directory | `public` |
 | Root directory | `/` |
 
 ## Step 4: Environment Variables (Optional)
@@ -73,6 +73,7 @@ If you need environment variables:
 4. Follow the DNS instructions
 
 ## Post-Deployment Checklist
+
 
 - [ ] Verify all pages load correctly
 - [ ] Test language switching
