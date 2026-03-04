@@ -65,7 +65,14 @@ export const translations = {
       // Warning Modal
       warningTitle: 'Important Information',
       warningText: 'By continuing, you confirm that you are at least 19 years of age and agree to our terms and conditions. Tickets are non-refundable. Please ensure your selection is correct before proceeding to payment.',
-      warningContinueBtn: 'I Understand, Continue'
+      warningContinueBtn: 'I Understand, Continue',
+
+      // QR Carousel (Phase 2)
+      womenTicket: 'Women Ticket',
+      menTicket: 'Men Ticket',
+      of: 'of',
+      showAtEntrance: 'Show each QR code at the entrance',
+      screenshotTip: 'Tip: Screenshot each QR code'
     },
     
     // Page 3 - Payment
@@ -172,7 +179,14 @@ export const translations = {
       // Warning Modal
       warningTitle: 'Información Importante',
       warningText: 'Al continuar, confirmas que tienes al menos 19 años de edad y aceptas nuestros términos y condiciones. Las entradas no son reembolsables. Asegúrate de que tu selección sea correcta antes de proceder al pago.',
-      warningContinueBtn: 'Entiendo, Continuar'
+      warningContinueBtn: 'Entiendo, Continuar',
+
+      // QR Carousel (Phase 2)
+      womenTicket: 'Entrada Mujer',
+      menTicket: 'Entrada Hombre',
+      of: 'de',
+      showAtEntrance: 'Muestra cada código QR en la entrada',
+      screenshotTip: 'Consejo: Captura cada código QR'
     },
     
     // Page 3 - Payment
@@ -279,7 +293,14 @@ export const translations = {
       // Warning Modal
       warningTitle: 'Informação Importante',
       warningText: 'Ao continuar, você confirma que tem pelo menos 19 anos de idade e concorda com nossos termos e condições. Os ingressos não são reembolsáveis. Certifique-se de que sua seleção está correta antes de prosseguir para o pagamento.',
-      warningContinueBtn: 'Entendi, Continuar'
+      warningContinueBtn: 'Entendi, Continuar',
+
+      // QR Carousel (Phase 2)
+      womenTicket: 'Ingresso Feminino',
+      menTicket: 'Ingresso Masculino',
+      of: 'de',
+      showAtEntrance: 'Mostre cada código QR na entrada',
+      screenshotTip: 'Dica: Tire print de cada código QR'
     },
     
     // Page 3 - Payment

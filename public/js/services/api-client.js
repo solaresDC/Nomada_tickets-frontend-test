@@ -107,3 +107,67 @@ export async function checkHealth() {
     return false;
   }
 }
+
+
+/**
+ * Get individual tickets for an order
+ * @param {string} paymentIntentId - The payment intent ID
+ * @returns {Promise<{status: string, tickets?: Array}>}
+ * @throws {ApiError} If request fails
+ */
+export async function getOrderTickets(paymentIntentId) {
+  console.log('[API] Getting tickets for:', paymentIntentId);
+  
+  const response = await get(`/api/orders/${paymentIntentId}/tickets`);
+  
+  return {
+    status: response.status,
+    tickets: response.tickets || []
+  };
+}
+
+/**
+ * Poll for individual tickets until ready or timeout
+ * @param {string} paymentIntentId - The payment intent ID
+ * @param {number} [interval=1500] - Polling interval in ms
+ * @param {number} [timeout=60000] - Maximum wait time in ms
+ * @returns {Promise<{tickets: Array<{id: string, ticketType: string, qrToken: string, qrImageDataUrl: string}>}>}
+ * @throws {Error} If timeout or request fails
+ */
+export async function pollForTickets(paymentIntentId, interval = 1500, timeout = 60000) {
+  console.log('[API] Starting ticket polling for:', paymentIntentId);
+  
+  const startTime = Date.now();
+  
+  while (Date.now() - startTime < timeout) {
+    try {
+      const response = await getOrderTickets(paymentIntentId);
+      
+      if (response.status === 'ready' && response.tickets.length > 0) {
+        console.log(`[API] Tickets ready: ${response.tickets.length} ticket(s)`);
+        return {
+          tickets: response.tickets
+        };
+      }
+      
+      console.log('[API] Tickets pending, waiting...');
+      
+      // Wait before next poll
+      await new Promise(resolve => setTimeout(resolve, interval));
+      
+    } catch (error) {
+      console.error('[API] Error polling for tickets:', error);
+      
+      // If it's a server error, keep trying
+      if (error.status >= 500) {
+        await new Promise(resolve => setTimeout(resolve, interval));
+        continue;
+      }
+      
+      // For client errors, throw immediately
+      throw error;
+    }
+  }
+  
+  throw new Error('Timeout waiting for tickets. Please refresh and check your email.');
+}

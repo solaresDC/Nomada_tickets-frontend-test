@@ -10,7 +10,7 @@ import { getElementById, on, setText, addClass, removeClass, scrollTo } from '..
 import { getTicketQuantities, clearTicketQuantities } from '../utils/storage.js';
 import { t } from '../i18n/translations.js';
 import { CONFIG } from '../config/index.js';
-import { createPaymentIntent, pollForQRCode } from '../services/api-client.js';
+import { createPaymentIntent, pollForQRCode, pollForTickets } from '../services/api-client.js';
 import { 
   createElements, 
   mountPaymentElement, 
@@ -18,6 +18,7 @@ import {
   getPaymentIntentId,
   cleanup as cleanupStripe 
 } from '../services/stripe.js';
+import { initCarousel, updateCarouselLanguage } from '../components/carousel.js';
 
 // Page state
 let stripe = null;
@@ -27,6 +28,9 @@ let clientSecret = null;
 let paymentIntentId = null;
 let femaleQty = 0;
 let maleQty = 0;
+
+// Store tickets data for language switching
+let currentTickets = [];
 
 /**
  * Initialize Page 3
@@ -99,6 +103,17 @@ async function onLanguageChange(lang) {
     paymentElement.on('ready', () => {
       if (payBtn) payBtn.disabled = false;
     });
+  }
+
+  // Update carousel language if tickets are displayed
+  if (currentTickets.length > 0) {
+    updateCarouselLanguage(lang, currentTickets);
+    
+    // Also update the success message
+    const successMsg = getElementById('Page3_SuccessMessage');
+    if (successMsg) {
+      setText(successMsg, t(lang, 'tickets.showAtEntrance'));
+    }
   }
 }
 
@@ -419,31 +434,37 @@ async function handlePayment() {
     // Show processing modal
     openModal('Page3_ProcessingModal', 'processingModalBackdrop');
     
-    // Poll for QR code
+    // Poll for individual tickets (Phase 2 — carousel)
     try {
-      console.log('[Page3] Polling for QR code...');
-      const qrResult = await pollForQRCode(
+      console.log('[Page3] Polling for tickets...');
+      const ticketResult = await pollForTickets(
         paymentIntentId,
         CONFIG.QR_POLL_INTERVAL,
         CONFIG.QR_POLL_TIMEOUT
       );
       
-      console.log('[Page3] QR code received');
+      console.log(`[Page3] Received ${ticketResult.tickets.length} ticket(s)`);
+      
+      // Store tickets for language switching
+      currentTickets = ticketResult.tickets;
       
       // Close processing modal
       closeModal('Page3_ProcessingModal', 'processingModalBackdrop');
       
-      // Show success modal with QR code
-      const qrImage = getElementById('Page3_QRCodeImage');
-      if (qrImage) {
-        qrImage.src = qrResult.qrImageDataUrl;
-        qrImage.alt = 'Ticket QR Code';
+      // Update success message to mention showing each QR
+      const successMsg = getElementById('Page3_SuccessMessage');
+      if (successMsg) {
+        setText(successMsg, t(lang, 'tickets.showAtEntrance'));
       }
       
+      // Initialize the carousel with the tickets
+      initCarousel('Page3_TicketCarousel', ticketResult.tickets, lang);
+      
+      // Open the success modal
       openModal('Page3_SuccessModal', 'successModalBackdrop');
       
     } catch (pollError) {
-      console.error('[Page3] QR polling failed:', pollError);
+      console.error('[Page3] Ticket polling failed:', pollError);
       closeModal('Page3_ProcessingModal', 'processingModalBackdrop');
       showPaymentError(t(lang, 'payment.errorTimeout'));
     }

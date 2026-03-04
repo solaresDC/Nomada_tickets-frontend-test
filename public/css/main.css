@@ -26,6 +26,7 @@
 @import url('./components/buttons.css');
 @import url('./components/forms.css');
 @import url('./components/modals.css');
+@import url('./components/carousel.css');
 
 /* Page-Specific Styles */
 @import url('./pages/index.css');
