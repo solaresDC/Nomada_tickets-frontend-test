@@ -176,9 +176,11 @@ function applyTranslations(lang) {
     setText(termsWarning, t(lang, 'payment.termsWarning'));
   }
   
-  // Pay button
+ // Pay button — always update text regardless of disabled state.
+  // The button starts disabled while Stripe loads, but we still
+  // want the correct language on it from the beginning.
   const payBtn = getElementById('Page3_PayButton');
-  if (payBtn && !payBtn.disabled) {
+  if (payBtn) {
     setText(payBtn, t(lang, 'payment.payBtn'));
   }
   
