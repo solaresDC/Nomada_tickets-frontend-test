@@ -62,7 +62,7 @@ export async function initPage3() {
   // Set up event listeners
   setupEventListeners();
   
-  // Initialize payment
+  // Initialize payment (no email at this point — user hasn't typed it yet)
   await initializePayment(currentLang);
   
   console.log('[Page3] Initialized');
@@ -177,7 +177,7 @@ function applyTranslations(lang) {
     setText(termsWarning, t(lang, 'payment.termsWarning'));
   }
   
- // Pay button — always update text regardless of disabled state.
+  // Pay button — always update text regardless of disabled state.
   // The button starts disabled while Stripe loads, but we still
   // want the correct language on it from the beginning.
   const payBtn = getElementById('Page3_PayButton');
@@ -222,7 +222,6 @@ function applyTranslations(lang) {
   if (qrCaption) {
     setText(qrCaption, t(lang, 'payment.qrCaption'));
   }
-  
 
   // Email section
   const emailLabel = getElementById('Page3_EmailLabel');
@@ -296,7 +295,9 @@ function updateOrderSummary(pricing) {
 }
 
 /**
- * Initialize payment - create PaymentIntent and mount Stripe Elements
+ * Initialize payment - create PaymentIntent and mount Stripe Elements.
+ * Email is NOT passed here — the user hasn't typed it yet at page load.
+ * Email is written to the PaymentIntent in handlePayment() right before confirmation.
  * @param {string} lang - Current language
  */
 async function initializePayment(lang) {
@@ -312,11 +313,9 @@ async function initializePayment(lang) {
       payBtn.disabled = true;
     }
     
-    // Create payment intent
+    // Create payment intent (no email yet — user hasn't typed it)
     console.log('[Page3] Creating payment intent...');
-    const emailInput = getElementById('Page3_EmailInput');
-    const email = emailInput ? emailInput.value.trim() : '';
-    const response = await createPaymentIntent(femaleQty, maleQty, lang, email);
+    const response = await createPaymentIntent(femaleQty, maleQty, lang);
     
     clientSecret = response.clientSecret;
     paymentIntentId = response.paymentIntentId;
@@ -421,13 +420,13 @@ async function handlePayment() {
     return;
   }
   
-  // Validate email
+  // Read email NOW — at the moment the user clicks Pay
   const emailInput = getElementById('Page3_EmailInput');
   const emailValue = emailInput ? emailInput.value.trim() : '';
   const emailError = getElementById('Page3_EmailError');
   
   if (emailValue && !isValidEmail(emailValue)) {
-    // Email was entered but is invalid
+    // Email was entered but is invalid — stop and show error
     if (emailError) emailError.style.display = 'block';
     if (emailInput) emailInput.focus();
     return;
@@ -438,7 +437,25 @@ async function handlePayment() {
   // Hide any previous errors
   hidePaymentError();
   hideTermsWarning();
-  
+
+  // Write the email into the PaymentIntent metadata before confirming.
+  // This is the correct moment — the user has finished typing.
+  if (emailValue && paymentIntentId) {
+    try {
+      console.log('[Page3] Updating email on PaymentIntent...');
+      await fetch(`${CONFIG.API_BASE_URL}/api/checkout/update-intent-email`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ paymentIntentId, email: emailValue })
+      });
+      console.log('[Page3] Email updated on PaymentIntent');
+    } catch (e) {
+      // Non-fatal — log the warning but continue with payment.
+      // The ticket will still be created; the email just won't send.
+      console.warn('[Page3] Could not update email on PaymentIntent:', e);
+    }
+  }
+
   // Disable button and show loading
   showButtonLoading('Page3_PayButton', t(lang, 'payment.payingBtn'));
   
