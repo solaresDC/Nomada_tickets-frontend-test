@@ -446,7 +446,7 @@ async function handlePayment() {
       await fetch(`${CONFIG.BACKEND_URL}/api/checkout/update-intent-email`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ paymentIntentId, email: emailValue })
+        body: JSON.stringify({ paymentIntentId, email: emailValue, language: lang })
       });
       console.log('[Page3] Email updated on PaymentIntent');
     } catch (e) {
