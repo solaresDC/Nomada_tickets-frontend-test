@@ -72,7 +72,8 @@ export const translations = {
       menTicket: 'Men Ticket',
       of: 'of',
       showAtEntrance: 'Show each QR code at the entrance',
-      screenshotTip: 'Tip: Screenshot each QR code'
+      screenshotTip: 'Tip: Screenshot each QR code',
+      checkEmail: 'Check your email for a copy of your tickets'   
     },
     
     // Page 3 - Payment
@@ -197,7 +198,8 @@ export const translations = {
       menTicket: 'Entrada Hombre',
       of: 'de',
       showAtEntrance: 'Muestra cada código QR en la entrada',
-      screenshotTip: 'Consejo: Captura cada código QR'
+      screenshotTip: 'Consejo: Captura cada código QR',
+      checkEmail: 'Revisa tu correo para una copia de tus boletos'
     },
     
     // Page 3 - Payment
@@ -322,7 +324,8 @@ export const translations = {
       menTicket: 'Ingresso Masculino',
       of: 'de',
       showAtEntrance: 'Mostre cada código QR na entrada',
-      screenshotTip: 'Dica: Tire print de cada código QR'
+      screenshotTip: 'Dica: Tire print de cada código QR',
+      checkEmail: 'Verifique seu e-mail para uma cópia dos seus ingressos'
     },
     
     // Page 3 - Payment

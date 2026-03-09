@@ -514,7 +514,7 @@ async function handlePayment() {
       const emailInput = getElementById('Page3_EmailInput');
       const buyerEmail = emailInput ? emailInput.value.trim() : '';
       if (buyerEmail) {
-        setTimeout(() => showEmailToast(lang), 300);
+        setTimeout(() => showEmailToast(lang), 1500);
       }
       
     } catch (pollError) {
@@ -584,7 +584,7 @@ function showEmailToast(lang) {
       removeClass(toast, 'visible');
       setTimeout(() => removeClass(modal, 'has-toast'), 400);
     }
-  }, 8000);
+  }, 14000);
 }
 
 /**

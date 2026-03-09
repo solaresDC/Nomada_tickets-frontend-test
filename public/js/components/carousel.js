@@ -128,6 +128,7 @@ function buildCarouselHTML(tickets, lang) {
     </div>
 
     <p class="carousel-tip">${tipText}</p>
+    <p class="carousel-tip">${t(lang, 'tickets.checkEmail')}</p>
   `;
 }
 
