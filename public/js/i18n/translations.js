@@ -73,7 +73,7 @@ export const translations = {
       of: 'of',
       showAtEntrance: 'Show each QR code at the entrance',
       screenshotTip: 'Tip: Screenshot each QR code',
-      checkEmail: 'Check your email for a copy of your tickets'   
+      checkEmail: '<strong>Check your Email</strong>, your tickets are ready!'  
     },
     
     // Page 3 - Payment
@@ -199,7 +199,7 @@ export const translations = {
       of: 'de',
       showAtEntrance: 'Muestra cada código QR en la entrada',
       screenshotTip: 'Consejo: Captura cada código QR',
-      checkEmail: 'Revisa tu correo para una copia de tus boletos'
+      checkEmail: '<strong>Revisa tu Correo</strong>, tus boletos están listos!'
     },
     
     // Page 3 - Payment
@@ -325,7 +325,7 @@ export const translations = {
       of: 'de',
       showAtEntrance: 'Mostre cada código QR na entrada',
       screenshotTip: 'Dica: Tire print de cada código QR',
-      checkEmail: 'Verifique seu e-mail para uma cópia dos seus ingressos'
+      checkEmail: '<strong>Verifique seu E-mail</strong>, seus ingressos estão prontos!'
     },
     
     // Page 3 - Payment

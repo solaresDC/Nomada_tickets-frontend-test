@@ -514,7 +514,7 @@ async function handlePayment() {
       const emailInput = getElementById('Page3_EmailInput');
       const buyerEmail = emailInput ? emailInput.value.trim() : '';
       if (buyerEmail) {
-        setTimeout(() => showEmailToast(lang), 1500);
+        setTimeout(() => showEmailToast(lang), 10000);
       }
       
     } catch (pollError) {
