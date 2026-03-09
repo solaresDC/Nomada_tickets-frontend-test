@@ -118,7 +118,7 @@
           
           <!-- Payment Card -->
           <div id="Page3_PaymentContainer" class="payment-card">
-            
+
             <!-- Order Summary -->
             <div class="order-summary">
               <h2 id="orderSummaryTitle" class="order-summary-title">Order Summary</h2>
@@ -168,6 +168,28 @@
                   <div class="stripe-loading-spinner"></div>
                 </div>
               </div>
+            </div>
+
+            <!-- Email Input -->
+            <div class="form-group" id="Page3_EmailSection" style="margin-bottom: 20px;">
+              <label for="Page3_EmailInput" id="Page3_EmailLabel" class="form-label" style="color: #e0d0c0;">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="Page3_EmailInput"
+                class="form-input"
+                placeholder="your@email.com"
+                autocomplete="email"
+                inputmode="email"
+                style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);"
+              />
+              <p id="Page3_EmailHelper" style="font-size: 0.8rem; color: #b0a090; margin-top: 6px;">
+                We'll send your tickets to this email
+              </p>
+              <p id="Page3_EmailError" class="terms-warning" style="display: none;">
+                Please enter a valid email address.
+              </p>
             </div>
             
             <!-- Terms Section -->

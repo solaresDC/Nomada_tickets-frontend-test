@@ -8,6 +8,7 @@ import { openModal, closeModal } from '../components/modal.js';
 import { showButtonLoading, hideButtonLoading } from '../components/loading-indicator.js';
 import { getElementById, on, setText, addClass, removeClass, scrollTo } from '../utils/dom.js';
 import { getTicketQuantities, clearTicketQuantities } from '../utils/storage.js';
+import { isValidEmail } from '../utils/validation.js';
 import { t } from '../i18n/translations.js';
 import { CONFIG } from '../config/index.js';
 import { createPaymentIntent, pollForQRCode, pollForTickets } from '../services/api-client.js';
@@ -222,6 +223,17 @@ function applyTranslations(lang) {
     setText(qrCaption, t(lang, 'payment.qrCaption'));
   }
   
+
+  // Email section
+  const emailLabel = getElementById('Page3_EmailLabel');
+  if (emailLabel) setText(emailLabel, t(lang, 'payment.emailLabel'));
+  
+  const emailInput = getElementById('Page3_EmailInput');
+  if (emailInput) emailInput.placeholder = t(lang, 'payment.emailPlaceholder');
+  
+  const emailHelper = getElementById('Page3_EmailHelper');
+  if (emailHelper) setText(emailHelper, t(lang, 'payment.emailHelper'));
+
   // Footer
   const copyright = getElementById('footerCopyright');
   if (copyright) {
@@ -302,7 +314,9 @@ async function initializePayment(lang) {
     
     // Create payment intent
     console.log('[Page3] Creating payment intent...');
-    const response = await createPaymentIntent(femaleQty, maleQty, lang);
+    const emailInput = getElementById('Page3_EmailInput');
+    const email = emailInput ? emailInput.value.trim() : '';
+    const response = await createPaymentIntent(femaleQty, maleQty, lang, email);
     
     clientSecret = response.clientSecret;
     paymentIntentId = response.paymentIntentId;
@@ -407,6 +421,20 @@ async function handlePayment() {
     return;
   }
   
+  // Validate email
+  const emailInput = getElementById('Page3_EmailInput');
+  const emailValue = emailInput ? emailInput.value.trim() : '';
+  const emailError = getElementById('Page3_EmailError');
+  
+  if (emailValue && !isValidEmail(emailValue)) {
+    // Email was entered but is invalid
+    if (emailError) emailError.style.display = 'block';
+    if (emailInput) emailInput.focus();
+    return;
+  } else {
+    if (emailError) emailError.style.display = 'none';
+  }
+
   // Hide any previous errors
   hidePaymentError();
   hideTermsWarning();

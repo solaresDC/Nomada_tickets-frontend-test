@@ -80,6 +80,11 @@ export const translations = {
       title: 'Complete Your Purchase',
       backLink: 'Back to ticket selection',
       
+      // Email
+      emailLabel: 'Email Address',
+      emailPlaceholder: 'your@email.com',
+      emailHelper: 'We\'ll send your tickets to this email',
+
       // Order Summary
       orderSummary: 'Order Summary',
       femaleTickets: 'Female Tickets',
@@ -193,6 +198,11 @@ export const translations = {
     payment: {
       title: 'Completa Tu Compra',
       backLink: 'Volver a selección de entradas',
+
+      //Email
+      emailLabel: 'Correo Electrónico',
+      emailPlaceholder: 'tu@correo.com',
+      emailHelper: 'Enviaremos tus boletos a este correo',
       
       // Order Summary
       orderSummary: 'Resumen del Pedido',
@@ -308,6 +318,11 @@ export const translations = {
       title: 'Complete Sua Compra',
       backLink: 'Voltar para seleção de ingressos',
       
+      //Email
+      emailLabel: 'Endereço de E-mail',
+      emailPlaceholder: 'seu@email.com',
+      emailHelper: 'Enviaremos seus ingressos para este e-mail',
+
       // Order Summary
       orderSummary: 'Resumo do Pedido',
       femaleTickets: 'Ingressos Femininos',

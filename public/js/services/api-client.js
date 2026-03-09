@@ -10,16 +10,18 @@ import { post, get, ApiError } from '../utils/api.js';
  * @param {number} femaleQty - Number of female tickets
  * @param {number} maleQty - Number of male tickets
  * @param {string} language - User's language
+ * @param {string} [email=''] - Buyer's email address (optional)
  * @returns {Promise<{clientSecret: string, paymentIntentId: string, pricing: Object}>}
  * @throws {ApiError} If request fails
  */
-export async function createPaymentIntent(femaleQty, maleQty, language) {
-  console.log('[API] Creating payment intent:', { femaleQty, maleQty, language });
+export async function createPaymentIntent(femaleQty, maleQty, language, email = '') {
+  console.log('[API] Creating payment intent:', { femaleQty, maleQty, language, email: email ? '(provided)' : '(none)' });
   
   const response = await post('/api/checkout/create-intent', {
     femaleQty,
     maleQty,
-    language
+    language,
+    ...(email ? { email } : {})
   });
   
   console.log('[API] Payment intent created:', response.paymentIntentId);
