@@ -212,12 +212,17 @@
   }
 }
 
-
-
 /* ============================================
    Email Sent Toast — Bold & Vibrant
-   Floats at the top of the success modal
+   Floats at the top of the success modal.
    ============================================ */
+
+/* 
+ * IMPORTANT: The .modal-success has position: fixed.
+ * We need position: relative on it so the toast's 
+ * position: absolute works relative to the modal box.
+ */
+
 .email-toast {
   position: absolute;
   top: 12px;
@@ -236,13 +241,13 @@
   pointer-events: auto;
 }
 
-.email-toast-inner {
+.modal-success .email-toast .email-toast-inner {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   padding: 14px 16px;
   border-radius: 14px;
-  background: linear-gradient(135deg, #7B1FA2 0%, #E91E63 50%, #FF6D00 100%);
+  background: linear-gradient(135deg, #7B1FA2 0%, #E91E63 50%, #FF6D00 100%) !important;
   box-shadow: 0 8px 32px rgba(233, 30, 99, 0.35),
               0 2px 8px rgba(0, 0, 0, 0.2);
 }
@@ -260,7 +265,7 @@
 }
 
 .email-toast-title {
-  color: #ffffff;
+  color: #ffffff !important;
   font-size: 0.85rem;
   font-weight: 700;
   margin: 0 0 3px 0;
@@ -268,14 +273,14 @@
 }
 
 .email-toast-subtitle {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.85) !important;
   font-size: 0.75rem;
   margin: 0;
   line-height: 1.4;
 }
 
 .email-toast-accent {
-  color: #ffffff;
+  color: #ffffff !important;
   font-weight: 700;
 }
 
@@ -283,20 +288,20 @@
   background: none;
   border: none;
   color: rgba(255, 255, 255, 0.6);
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  padding: 0 2px;
+  padding: 4px 6px;
   line-height: 1;
   flex-shrink: 0;
   transition: color 0.15s;
 }
 
-.email-toast-close:hover {
+.email-toast-close:hover,
+.email-toast-close:active {
   color: #ffffff;
 }
 
-/* Push the modal header down slightly when toast is visible
-   so the toast doesn't overlap the checkmark */
+/* Push modal header down when toast is showing */
 .modal-success .modal-header {
   transition: padding-top 0.4s ease-out;
 }
