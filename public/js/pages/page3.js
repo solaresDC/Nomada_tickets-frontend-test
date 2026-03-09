@@ -443,7 +443,7 @@ async function handlePayment() {
   if (emailValue && paymentIntentId) {
     try {
       console.log('[Page3] Updating email on PaymentIntent...');
-      await fetch(`${CONFIG.API_BASE_URL}/api/checkout/update-intent-email`, {
+      await fetch(`${CONFIG.BACKEND_URL}/api/checkout/update-intent-email`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ paymentIntentId, email: emailValue })
