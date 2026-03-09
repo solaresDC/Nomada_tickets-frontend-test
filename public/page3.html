@@ -254,6 +254,23 @@
   
   <!-- Success Modal -->
   <div id="Page3_SuccessModal" class="modal modal-success" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+
+      <!-- Email Sent Toast (appears after payment) -->
+      <div id="Page3_EmailToast" class="email-toast" role="status" aria-live="polite">
+        <div class="email-toast-inner">
+          <span class="email-toast-icon">🎟️</span>
+          <div class="email-toast-content">
+            <p class="email-toast-title" id="emailToastTitle">Your ticket is on its way!</p>
+            <p class="email-toast-subtitle" id="emailToastSubtitle">
+              If you don't see it in 2 minutes, check your 
+              <span class="email-toast-accent">spam/junk</span> folder 
+              and mark it as <span class="email-toast-accent">Not Spam</span>.
+            </p>
+            </div>
+            <button class="email-toast-close" id="emailToastClose" aria-label="Dismiss">&times;</button>
+          </div>
+        </div>
+
     <div class="modal-header">
       <div class="success-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">

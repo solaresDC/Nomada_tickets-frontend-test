@@ -211,3 +211,96 @@
     height: 200px;
   }
 }
+
+
+
+/* ============================================
+   Email Sent Toast — Bold & Vibrant
+   Floats at the top of the success modal
+   ============================================ */
+.email-toast {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.email-toast.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.email-toast-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #7B1FA2 0%, #E91E63 50%, #FF6D00 100%);
+  box-shadow: 0 8px 32px rgba(233, 30, 99, 0.35),
+              0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.email-toast-icon {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.email-toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.email-toast-title {
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0 0 3px 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.email-toast-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.75rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.email-toast-accent {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.email-toast-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.email-toast-close:hover {
+  color: #ffffff;
+}
+
+/* Push the modal header down slightly when toast is visible
+   so the toast doesn't overlap the checkmark */
+.modal-success .modal-header {
+  transition: padding-top 0.4s ease-out;
+}
+
+.modal-success.has-toast .modal-header {
+  padding-top: 56px;
+}

@@ -509,6 +509,13 @@ async function handlePayment() {
       
       // Open the success modal
       openModal('Page3_SuccessModal', 'successModalBackdrop');
+
+      // Show email toast if buyer provided an email
+      const emailInput = getElementById('Page3_EmailInput');
+      const buyerEmail = emailInput ? emailInput.value.trim() : '';
+      if (buyerEmail) {
+        showEmailToast(lang);
+      }
       
     } catch (pollError) {
       console.error('[Page3] Ticket polling failed:', pollError);
@@ -524,6 +531,60 @@ async function handlePayment() {
   
   // Re-enable button
   hideButtonLoading('Page3_PayButton');
+}
+
+/**
+ * Show the email toast notification inside the success modal.
+ * Slides in from top, auto-hides after 8 seconds.
+ * Only shows if the buyer provided an email.
+ */
+function showEmailToast(lang) {
+  const toast = getElementById('Page3_EmailToast');
+  const modal = getElementById('Page3_SuccessModal');
+  const closeBtn = getElementById('emailToastClose');
+  if (!toast || !modal) return;
+
+  // Update text based on language
+  const titleEl = getElementById('emailToastTitle');
+  const subtitleEl = getElementById('emailToastSubtitle');
+
+  if (titleEl) {
+    setText(titleEl, t(lang, 'payment.emailToastTitle'));
+  }
+  if (subtitleEl) {
+    // Build subtitle with accent spans
+    const spamText = t(lang, 'payment.emailToastSpam');
+    const notSpamText = t(lang, 'payment.emailToastNotSpam');
+    const fullSubtitle = t(lang, 'payment.emailToastSubtitle');
+    // Replace placeholders with bold spans
+    subtitleEl.innerHTML = fullSubtitle
+      .replace('{spam}', '<span class="email-toast-accent">' + spamText + '</span>')
+      .replace('{notSpam}', '<span class="email-toast-accent">' + notSpamText + '</span>');
+  }
+
+  // Add class to push modal header down
+  addClass(modal, 'has-toast');
+
+  // Slide in
+  requestAnimationFrame(() => {
+    addClass(toast, 'visible');
+  });
+
+  // Close button
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      removeClass(toast, 'visible');
+      setTimeout(() => removeClass(modal, 'has-toast'), 400);
+    };
+  }
+
+  // Auto-hide after 8 seconds
+  setTimeout(() => {
+    if (toast.classList.contains('visible')) {
+      removeClass(toast, 'visible');
+      setTimeout(() => removeClass(modal, 'has-toast'), 400);
+    }
+  }, 8000);
 }
 
 /**

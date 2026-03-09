@@ -114,6 +114,12 @@ export const translations = {
       successMessage: 'Your tickets have been confirmed. Show this QR code at the entrance.',
       successContinueBtn: 'Back to Home',
       qrCaption: 'Your Ticket QR Code',
+
+      // Email Toast
+      emailToastTitle: 'Your ticket is on its way!',
+      emailToastSubtitle: "If you don't see it in 2 minutes, check your {spam} folder and mark it as {notSpam}.",
+      emailToastSpam: 'spam/junk',
+      emailToastNotSpam: 'Not Spam',
       
       // Errors
       errorGeneric: 'Something went wrong. Please try again.',
@@ -234,6 +240,12 @@ export const translations = {
       successContinueBtn: 'Volver al Inicio',
       qrCaption: 'Tu Código QR de Entrada',
       
+      // Email Toast
+      emailToastTitle: '¡Tu entrada está en camino!',
+      emailToastSubtitle: 'Si no lo ves en 2 minutos, revisa tu carpeta de {spam} y márcalo como {notSpam}.',
+      emailToastSpam: 'spam/correo no deseado',
+      emailToastNotSpam: 'No es Spam',
+
       // Errors
       errorGeneric: 'Algo salió mal. Por favor intenta de nuevo.',
       errorPayment: 'El pago falló. Por favor verifica los datos de tu tarjeta e intenta de nuevo.',
@@ -352,6 +364,12 @@ export const translations = {
       successMessage: 'Seus ingressos foram confirmados. Mostre este código QR na entrada.',
       successContinueBtn: 'Voltar ao Início',
       qrCaption: 'Seu Código QR do Ingresso',
+
+      // Email Toast
+      emailToastTitle: 'Seu ingresso está a caminho!',
+      emailToastSubtitle: 'Se não aparecer em 2 minutos, verifique sua pasta de {spam} e marque como {notSpam}.',
+      emailToastSpam: 'spam/lixo eletrônico',
+      emailToastNotSpam: 'Não é Spam',
       
       // Errors
       errorGeneric: 'Algo deu errado. Por favor tente novamente.',
