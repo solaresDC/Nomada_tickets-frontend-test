@@ -128,7 +128,7 @@ function setupEventListeners() {
       let formatted = raw;
       if (raw.length > 7) {
         formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7, 11);
-      } else if (raw.length > 3) {
+      } else if (raw.length >= 3) {
         formatted = raw.slice(0, 3) + '-' + raw.slice(3);
       }
 
@@ -195,7 +195,7 @@ function openLookupModal() {
 
   setTimeout(() => {
     const emailInput = getElementById('LookupModal_EmailInput');
-    if (emailInput) emailInput.focus();
+    if (emailInput) emailInput.focus({ preventScroll: true });
   }, 50);
 }
 
