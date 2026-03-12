@@ -118,11 +118,11 @@ function setupEventListeners() {
     });
   }
 
-  // Auto-dash formatter: NMD-XXXX-XXXX
-  const refInput = getElementById('LookupModal_RefInput');
-  if (refInput) {
-    on(refInput, 'input', () => {
-      const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 10);
+// Auto-dash formatter: NMD-XXXX-XXXX
+const refInput = getElementById('LookupModal_RefInput');
+if (refInput) {
+  on(refInput, 'input', () => {
+    const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 10);
 
     let formatted;
     if (raw.length < 3) {
@@ -133,11 +133,13 @@ function setupEventListeners() {
       formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7);
     }
 
-    const prevLen = refInput.value.length;    // capture old length first
-    const cursor = refInput.selectionStart;   // capture cursor position
-    refInput.value = formatted;               // update value
-    const diff = formatted.length - prevLen;  // how many chars were added
-    refInput.setSelectionRange(cursor + diff, cursor + diff); // move cursor forward by that amount
+    if (refInput.value !== formatted) {
+      const cursor = refInput.selectionStart;
+      const prevLen = refInput.value.length;
+      refInput.value = formatted;
+      const newPos = cursor + (formatted.length - prevLen);
+      refInput.setSelectionRange(newPos, newPos);
+    }
   });
 }
 
