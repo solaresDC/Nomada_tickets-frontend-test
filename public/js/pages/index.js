@@ -129,7 +129,7 @@ function setupEventListeners() {
   if (refInput) {
     on(refInput, 'input', () => {
       // Strip anything that isn't a letter or digit, uppercase, cap at 10 raw chars
-      const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 10);
+      const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 11);
 
       // Insert dashes: NMD-XXXX-XXXX
       let formatted = raw;
