@@ -1,11 +1,6 @@
 /**
  * Page 1 (index.html) JavaScript
  * Landing page functionality
- *
- * CHANGES FROM ORIGINAL:
- * - "Events" button now opens the ticket lookup modal instead of scrolling
- * - Full lookup modal logic: form, lockout countdown, results carousel, resend
- * - Reference input auto-formats to NMD-XXXX-XXXX as user types
  */
 
 import { initHeader, getCurrentLanguage } from '../components/header.js';
@@ -25,16 +20,13 @@ let touchStartX = 0;
 
 export function initPage1() {
   console.log('[Page1] Initializing...');
-
   currentLang = initHeader(onLanguageChange);
   applyTranslations(currentLang);
   setupEventListeners();
-
   console.log('[Page1] Initialized');
 }
 
 function onLanguageChange(lang) {
-  console.log('[Page1] Language changed to:', lang);
   currentLang = lang;
   applyTranslations(lang);
 }
@@ -99,9 +91,11 @@ function setupEventListeners() {
     });
   }
 
+  // FIX 1: preventDefault stops any scroll/anchor jump
   const checkTicketsBtn = getElementById('Page1_CheckTicketsButton');
   if (checkTicketsBtn) {
-    on(checkTicketsBtn, 'click', () => {
+    on(checkTicketsBtn, 'click', (e) => {
+      e.preventDefault();
       openLookupModal();
     });
   }
@@ -124,17 +118,16 @@ function setupEventListeners() {
     });
   }
 
-  // Auto-uppercase + auto-dash formatter: NMD-XXXX-XXXX
+  // FIX 4: Auto-dash — inserts '-' automatically after char 3 and char 7
   const refInput = getElementById('LookupModal_RefInput');
   if (refInput) {
     on(refInput, 'input', () => {
-      // Strip anything that isn't a letter or digit, uppercase, cap at 10 raw chars
+      // Strip non-alphanumeric, uppercase, cap at 11 to leave room for incoming char
       const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 11);
 
-      // Insert dashes: NMD-XXXX-XXXX
       let formatted = raw;
       if (raw.length > 7) {
-        formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7);
+        formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7, 11);
       } else if (raw.length > 3) {
         formatted = raw.slice(0, 3) + '-' + raw.slice(3);
       }
@@ -143,8 +136,13 @@ function setupEventListeners() {
     });
   }
 
+  // FIX 2: Back button goes to home page
   const backBtn = getElementById('LookupModal_BackBtn');
-  if (backBtn) on(backBtn, 'click', () => showFormView());
+  if (backBtn) {
+    on(backBtn, 'click', () => {
+      window.location.href = 'index.html';
+    });
+  }
 
   const prevBtn = getElementById('LookupModal_CarouselPrev');
   const nextBtn = getElementById('LookupModal_CarouselNext');
@@ -188,6 +186,9 @@ function openLookupModal() {
   clearLookupError();
   clearResendFeedback();
 
+  // FIX 1: Lock body scroll so page doesn't jump
+  document.body.style.overflow = 'hidden';
+
   backdrop.classList.add('active');
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
@@ -206,6 +207,9 @@ function closeLookupModal() {
   backdrop.classList.remove('active');
   modal.classList.remove('active');
   modal.setAttribute('aria-hidden', 'true');
+
+  // FIX 1: Restore scroll
+  document.body.style.overflow = '';
 
   if (lockoutTimer) {
     clearInterval(lockoutTimer);
@@ -318,7 +322,6 @@ async function handleLookupSubmit() {
     return;
   }
 
-  // Require 10 alphanumeric chars (dashes don't count toward length)
   if (!orderReference || orderReference.replace(/-/g, '').length < 10) {
     showLookupError(t(currentLang, 'lookup.errorNotFound'));
     return;

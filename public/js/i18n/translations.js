@@ -13,7 +13,6 @@ export const translations = {
   // ENGLISH
   // ============================================
   en: {
-    // Header
     header: {
       byline: 'by Nómada',
       language: 'Language',
@@ -22,16 +21,13 @@ export const translations = {
       languagePTBR: 'Português'
     },
 
-    // Page 1 - Home
     home: {
       heroTitle: 'Providing Premium',
       heroTitleHighlight: 'Nightlife',
       heroTitleEnd: 'Experiences',
       heroSubtitle: 'Join us for unforgettable nights with exclusive access to Toronto\'s hottest venues, free shots, drink deals, and professional photography.',
       buyTicketBtn: 'Buy your ticket',
-      checkTicketsBtn: 'Check your tickets', // REPLACES eventsBtn
-
-      // Features
+      checkTicketsBtn: 'Check your tickets',
       featuresTitle: 'What\'s Included',
       feature1Title: 'Free Shots',
       feature1Desc: 'Complimentary shots at each venue we visit throughout the night.',
@@ -41,12 +37,9 @@ export const translations = {
       feature3Desc: 'Professional photographer capturing your best moments all night.',
       feature4Title: 'Best Night Ever',
       feature4Desc: 'Curated experience with VIP entry and the best party atmosphere.',
-
-      // Banner
       bannerBtn: 'Check out our upcoming events'
     },
 
-    // Page 2 - Ticket Selection
     tickets: {
       title: 'Select Your',
       titleHighlight: 'Tickets',
@@ -68,7 +61,6 @@ export const translations = {
       checkEmail: '<strong>Check your Email</strong>, your tickets are ready!'
     },
 
-    // Page 3 - Payment
     payment: {
       title: 'Complete Your Purchase',
       backLink: 'Back to ticket selection',
@@ -103,12 +95,10 @@ export const translations = {
       errorTimeout: 'Request timed out. Please try again.'
     },
 
-    // Footer
     footer: {
       copyright: '© 2026 Nómada. All rights reserved.'
     },
 
-    // Ticket Lookup Modal
     lookup: {
       modalTitle: 'Find Your Tickets',
       modalSubtitle: 'Enter your details to retrieve your order.',
@@ -119,7 +109,7 @@ export const translations = {
       refHelper: 'Found in your confirmation email.',
       submitBtn: 'Find My Tickets',
       submittingBtn: 'Searching...',
-      backBtn: '← Search again',
+      backBtn: 'Go to Home',
       errorNotFound: 'No order found. Please check your email and reference code.',
       errorNetwork: 'Network error. Please check your connection and try again.',
       errorGeneric: 'Something went wrong. Please try again.',
@@ -152,7 +142,6 @@ export const translations = {
   // SPANISH
   // ============================================
   es: {
-    // Header
     header: {
       byline: 'por Nómada',
       language: 'Idioma',
@@ -161,7 +150,6 @@ export const translations = {
       languagePTBR: 'Português'
     },
 
-    // Page 1 - Home
     home: {
       heroTitle: 'Ofreciendo Experiencias',
       heroTitleHighlight: 'Nocturnas',
@@ -169,8 +157,6 @@ export const translations = {
       heroSubtitle: 'Únete a nosotros para noches inolvidables con acceso exclusivo a los mejores lugares de Toronto, shots gratis, ofertas de bebidas y fotografía profesional.',
       buyTicketBtn: 'Compra tu entrada',
       checkTicketsBtn: 'Consultar mis entradas',
-
-      // Features
       featuresTitle: 'Qué Incluye',
       feature1Title: 'Shots Gratis',
       feature1Desc: 'Shots de cortesía en cada lugar que visitemos durante la noche.',
@@ -180,12 +166,9 @@ export const translations = {
       feature3Desc: 'Fotógrafo profesional capturando tus mejores momentos toda la noche.',
       feature4Title: 'Mejor Noche',
       feature4Desc: 'Experiencia curada con entrada VIP y el mejor ambiente de fiesta.',
-
-      // Banner
       bannerBtn: 'Mira nuestros próximos eventos'
     },
 
-    // Page 2 - Ticket Selection
     tickets: {
       title: 'Selecciona Tus',
       titleHighlight: 'Entradas',
@@ -207,7 +190,6 @@ export const translations = {
       checkEmail: '<strong>Revisa tu Correo</strong>, ¡tus entradas están listas!'
     },
 
-    // Page 3 - Payment
     payment: {
       title: 'Completa tu Compra',
       backLink: 'Volver a selección de entradas',
@@ -242,12 +224,10 @@ export const translations = {
       errorTimeout: 'La solicitud expiró. Por favor intenta de nuevo.'
     },
 
-    // Footer
     footer: {
       copyright: '© 2026 Nómada. Todos los derechos reservados.'
     },
 
-    // Ticket Lookup Modal
     lookup: {
       modalTitle: 'Encuentra tus Entradas',
       modalSubtitle: 'Ingresa tus datos para recuperar tu pedido.',
@@ -258,7 +238,7 @@ export const translations = {
       refHelper: 'Encuéntralo en tu correo de confirmación.',
       submitBtn: 'Buscar mis Entradas',
       submittingBtn: 'Buscando...',
-      backBtn: '← Buscar de nuevo',
+      backBtn: 'Ir al Inicio',
       errorNotFound: 'No se encontró ningún pedido. Verifica tu correo y referencia.',
       errorNetwork: 'Error de red. Verifica tu conexión e inténtalo de nuevo.',
       errorGeneric: 'Algo salió mal. Por favor inténtalo de nuevo.',
@@ -291,7 +271,6 @@ export const translations = {
   // PORTUGUESE (BRAZIL)
   // ============================================
   'pt-BR': {
-    // Header
     header: {
       byline: 'por Nómada',
       language: 'Idioma',
@@ -300,7 +279,6 @@ export const translations = {
       languagePTBR: 'Português'
     },
 
-    // Page 1 - Home
     home: {
       heroTitle: 'Proporcionando Experiências',
       heroTitleHighlight: 'Noturnas',
@@ -308,8 +286,6 @@ export const translations = {
       heroSubtitle: 'Junte-se a nós para noites inesquecíveis com acesso exclusivo aos melhores locais de Toronto, shots grátis, promoções de bebidas e fotografia profissional.',
       buyTicketBtn: 'Compre seu ingresso',
       checkTicketsBtn: 'Consultar meus ingressos',
-
-      // Features
       featuresTitle: 'O Que Está Incluído',
       feature1Title: 'Shots Grátis',
       feature1Desc: 'Shots cortesia em cada local que visitamos durante a noite.',
@@ -319,12 +295,9 @@ export const translations = {
       feature3Desc: 'Fotógrafo profissional capturando seus melhores momentos a noite toda.',
       feature4Title: 'Melhor Noite',
       feature4Desc: 'Experiência curada com entrada VIP e a melhor atmosfera de festa.',
-
-      // Banner
       bannerBtn: 'Confira nossos próximos eventos'
     },
 
-    // Page 2 - Ticket Selection
     tickets: {
       title: 'Selecione Seus',
       titleHighlight: 'Ingressos',
@@ -346,7 +319,6 @@ export const translations = {
       checkEmail: '<strong>Verifique seu E-mail</strong>, seus ingressos estão prontos!'
     },
 
-    // Page 3 - Payment
     payment: {
       title: 'Complete Sua Compra',
       backLink: 'Voltar para seleção de ingressos',
@@ -381,12 +353,10 @@ export const translations = {
       errorTimeout: 'A solicitação expirou. Por favor tente novamente.'
     },
 
-    // Footer
     footer: {
       copyright: '© 2026 Nómada. Todos os direitos reservados.'
     },
 
-    // Ticket Lookup Modal
     lookup: {
       modalTitle: 'Encontre seus Ingressos',
       modalSubtitle: 'Insira seus dados para recuperar seu pedido.',
@@ -397,7 +367,7 @@ export const translations = {
       refHelper: 'Encontre no seu e-mail de confirmação.',
       submitBtn: 'Buscar meus Ingressos',
       submittingBtn: 'Buscando...',
-      backBtn: '← Buscar novamente',
+      backBtn: 'Ir ao Início',
       errorNotFound: 'Pedido não encontrado. Verifique seu e-mail e referência.',
       errorNetwork: 'Erro de rede. Verifique sua conexão e tente novamente.',
       errorGeneric: 'Algo deu errado. Por favor tente novamente.',
@@ -441,7 +411,6 @@ export function t(lang, keyPath) {
     if (result && typeof result === 'object' && key in result) {
       result = result[key];
     } else {
-      // Fallback to English
       result = translations.en;
       for (const fallbackKey of keys) {
         if (result && typeof result === 'object' && fallbackKey in result) {
