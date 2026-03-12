@@ -202,22 +202,9 @@
 /* Responsive Modal */
 @media (max-width: 480px) {
   .modal-lookup {
-    width: 100%;
-    max-width: 100%;
-    max-height: 92dvh;
-    margin: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    top: auto;
-    bottom: 0;
-    left: 0;
-    transform: none;
-    overflow-y: auto;
+    width: 92%;
+    max-height: 85vh;
     padding: var(--spacing-lg);
-  }
-
-  .modal-lookup.active {
-    transform: none;
   }
 }
 
@@ -744,15 +731,29 @@
 }
 
 /* ── Mobile adjustments ───────────────────────────────────── */
-@media (max-width: 30em) {
+/* Hide X button when showing results */
+.modal-lookup:has(.lookup-results-view.visible) .modal-close {
+  display: none;
+}
+
+@media (max-width: 480px) {
   .modal-lookup {
+    width: 92%;
+    max-height: 85vh;
     padding: var(--spacing-lg);
-    max-height: 95vh;
   }
 
   .lookup-ticket-qr {
-    width: 170px;
-    height: 170px;
+    width: 150px;
+    height: 150px;
+  }
+
+  .lookup-summary {
+    font-size: var(--font-size-sm);
+  }
+
+  .lookup-summary-row {
+    padding: 4px 0;
   }
 
   .lookup-carousel-btn--prev { left: -12px; }
