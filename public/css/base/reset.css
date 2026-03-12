@@ -103,3 +103,8 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+/* Enable touch interactions */
+* {
+  touch-action: manipulation;
+}
