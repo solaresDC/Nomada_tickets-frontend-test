@@ -122,7 +122,7 @@ function setupEventListeners() {
 const refInput = getElementById('LookupModal_RefInput');
 if (refInput) {
   on(refInput, 'input', () => {
-    const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 10);
+    const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 11);
 
     let formatted;
     if (raw.length < 3) {
