@@ -133,11 +133,11 @@ function setupEventListeners() {
       formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7);
     }
 
-    const cursor = refInput.selectionStart;
-    const prevLen = refInput.value.length;
-    refInput.value = formatted;
-    const diff = formatted.length - prevLen;
-    refInput.setSelectionRange(cursor + diff, cursor + diff);
+    const prevLen = refInput.value.length;    // capture old length first
+    const cursor = refInput.selectionStart;   // capture cursor position
+    refInput.value = formatted;               // update value
+    const diff = formatted.length - prevLen;  // how many chars were added
+    refInput.setSelectionRange(cursor + diff, cursor + diff); // move cursor forward by that amount
   });
 }
 
