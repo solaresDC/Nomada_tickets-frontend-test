@@ -214,6 +214,9 @@ function closeLookupModal() {
 
   // FIX 1: Restore scroll
   document.body.style.overflow = '';
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.width = '';
 
   if (lockoutTimer) {
     clearInterval(lockoutTimer);

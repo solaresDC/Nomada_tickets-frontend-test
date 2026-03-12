@@ -200,15 +200,24 @@
 }
 
 /* Responsive Modal */
-@media (max-width: 30em) {
-  .modal {
-    width: 95%;
+@media (max-width: 480px) {
+  .modal-lookup {
+    width: 100%;
+    max-width: 100%;
+    max-height: 92dvh;
+    margin: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    transform: none;
+    overflow-y: auto;
     padding: var(--spacing-lg);
   }
-  
-  .qr-code-image {
-    width: 200px;
-    height: 200px;
+
+  .modal-lookup.active {
+    transform: none;
   }
 }
 
