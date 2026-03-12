@@ -118,9 +118,9 @@ function setupEventListeners() {
     });
   }
 
-// Auto-dash formatter: NMD-XXXX-XXXX
-const refInput = getElementById('LookupModal_RefInput');
-if (refInput) {
+  // Auto-dash formatter: NMD-XXXX-XXXX
+  const refInput = getElementById('LookupModal_RefInput');
+  if (refInput) {
   on(refInput, 'input', () => {
     const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 11);
 
@@ -133,16 +133,11 @@ if (refInput) {
       formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7);
     }
 
-    if (refInput.value !== formatted) {
-      const cursor = refInput.selectionStart;
-      const prevLen = refInput.value.length;
-      refInput.value = formatted;
-      const diff = formatted.length - prevLen;
-      if (diff > 0) {
-        refInput.setSelectionRange(cursor + diff, cursor + diff);
-      }
-    }
-
+    const cursor = refInput.selectionStart;
+    const prevLen = refInput.value.length;
+    refInput.value = formatted;
+    const diff = formatted.length - prevLen;
+    refInput.setSelectionRange(Math.max(0, cursor + diff), Math.max(0, cursor + diff));
   });
 }
 
