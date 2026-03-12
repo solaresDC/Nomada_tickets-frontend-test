@@ -5,6 +5,7 @@
  * CHANGES FROM ORIGINAL:
  * - "Events" button now opens the ticket lookup modal instead of scrolling
  * - Full lookup modal logic: form, lockout countdown, results carousel, resend
+ * - Reference input auto-formats to NMD-XXXX-XXXX as user types
  */
 
 import { initHeader, getCurrentLanguage } from '../components/header.js';
@@ -17,8 +18,8 @@ import { CONFIG } from '../config/index.js';
 let currentLang = 'en';
 let carouselCurrentIndex = 0;
 let carouselTotal = 0;
-let lockoutTimer = null;        // setInterval handle for countdown
-let touchStartX = 0;            // for swipe detection
+let lockoutTimer = null;
+let touchStartX = 0;
 
 // ─── Init ─────────────────────────────────────────────────────
 
@@ -41,7 +42,6 @@ function onLanguageChange(lang) {
 // ─── Translations ─────────────────────────────────────────────
 
 function applyTranslations(lang) {
-  // Hero section
   const heroTitle = getElementById('heroTitle');
   if (heroTitle) {
     heroTitle.innerHTML = `${t(lang, 'home.heroTitle')} <span class="highlight">${t(lang, 'home.heroTitleHighlight')}</span> ${t(lang, 'home.heroTitleEnd')}`;
@@ -50,18 +50,15 @@ function applyTranslations(lang) {
   const heroSubtitle = getElementById('heroSubtitle');
   if (heroSubtitle) setText(heroSubtitle, t(lang, 'home.heroSubtitle'));
 
-  // Buttons
   const buyTicketBtn = getElementById('Page1_BuyTicketButton');
   if (buyTicketBtn) setText(buyTicketBtn, t(lang, 'home.buyTicketBtn'));
 
-  // CHANGED: "Events" button now says "Check your tickets"
   const checkTicketsBtn = getElementById('Page1_CheckTicketsButton');
   if (checkTicketsBtn) setText(checkTicketsBtn, t(lang, 'home.checkTicketsBtn'));
 
   const bannerBtn = getElementById('Page1_BannerButton');
   if (bannerBtn) setText(bannerBtn, t(lang, 'home.bannerBtn'));
 
-  // Features section
   const featuresTitle = getElementById('featuresTitle');
   if (featuresTitle) setText(featuresTitle, t(lang, 'home.featuresTitle'));
 
@@ -79,18 +76,15 @@ function applyTranslations(lang) {
     if (desc) setText(desc, t(lang, descKey));
   });
 
-  // Footer
   const copyright = getElementById('Page1_CopyrightText');
   if (copyright) setText(copyright, t(lang, 'footer.copyright'));
 
-  // Translate static modal text (if modal is open)
   translateLookupModal(lang);
 }
 
 // ─── Event Listeners ──────────────────────────────────────────
 
 function setupEventListeners() {
-  // Buy ticket button → page 2
   const buyTicketBtn = getElementById('Page1_BuyTicketButton');
   if (buyTicketBtn) {
     on(buyTicketBtn, 'click', () => {
@@ -98,7 +92,6 @@ function setupEventListeners() {
     });
   }
 
-  // Banner button → external link
   const bannerBtn = getElementById('Page1_BannerButton');
   if (bannerBtn) {
     on(bannerBtn, 'click', () => {
@@ -106,7 +99,6 @@ function setupEventListeners() {
     });
   }
 
-  // CHANGED: "Check your tickets" button → open lookup modal
   const checkTicketsBtn = getElementById('Page1_CheckTicketsButton');
   if (checkTicketsBtn) {
     on(checkTicketsBtn, 'click', () => {
@@ -114,7 +106,6 @@ function setupEventListeners() {
     });
   }
 
-  // Modal backdrop click → close
   const backdrop = getElementById('LookupModal_Backdrop');
   if (backdrop) {
     on(backdrop, 'click', (e) => {
@@ -122,11 +113,9 @@ function setupEventListeners() {
     });
   }
 
-  // Modal close button (X)
   const closeBtn = getElementById('LookupModal_CloseBtn');
   if (closeBtn) on(closeBtn, 'click', closeLookupModal);
 
-  // Lookup form submit
   const lookupForm = getElementById('LookupModal_Form');
   if (lookupForm) {
     on(lookupForm, 'submit', (e) => {
@@ -135,42 +124,33 @@ function setupEventListeners() {
     });
   }
 
-  // Auto-uppercase + auto-dash the reference input as user types
-  // Formats raw input into NMD-XXXX-XXXX as the user types
+  // Auto-uppercase + auto-dash formatter: NMD-XXXX-XXXX
   const refInput = getElementById('LookupModal_RefInput');
   if (refInput) {
     on(refInput, 'input', () => {
-      // Strip everything except letters and digits, uppercase
-      const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+      // Strip anything that isn't a letter or digit, uppercase, cap at 10 raw chars
+      const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 10);
 
-      // Format as NMD-XXXX-XXXX
-      // Characters 0-2  → "NMD"
-      // Characters 3-6  → "-XXXX"
-      // Characters 7-10 → "-XXXX"
-      let formatted = '';
-      if (raw.length <= 3) {
-        formatted = raw;
-      } else if (raw.length <= 7) {
+      // Insert dashes: NMD-XXXX-XXXX
+      let formatted = raw;
+      if (raw.length > 7) {
+        formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7);
+      } else if (raw.length > 3) {
         formatted = raw.slice(0, 3) + '-' + raw.slice(3);
-      } else {
-        formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7, 11);
       }
 
       refInput.value = formatted;
     });
   }
 
-  // Back to search button (in results view)
   const backBtn = getElementById('LookupModal_BackBtn');
   if (backBtn) on(backBtn, 'click', () => showFormView());
 
-  // Carousel prev/next
   const prevBtn = getElementById('LookupModal_CarouselPrev');
   const nextBtn = getElementById('LookupModal_CarouselNext');
   if (prevBtn) on(prevBtn, 'click', () => carouselGoTo(carouselCurrentIndex - 1));
   if (nextBtn) on(nextBtn, 'click', () => carouselGoTo(carouselCurrentIndex + 1));
 
-  // Carousel swipe (touch)
   const carouselTrack = getElementById('LookupModal_CarouselTrack');
   if (carouselTrack) {
     on(carouselTrack, 'touchstart', (e) => {
@@ -184,11 +164,9 @@ function setupEventListeners() {
     }, { passive: true });
   }
 
-  // Resend button
   const resendBtn = getElementById('LookupModal_ResendBtn');
   if (resendBtn) on(resendBtn, 'click', handleResend);
 
-  // Keyboard: ESC closes modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       const backdrop = getElementById('LookupModal_Backdrop');
@@ -206,7 +184,6 @@ function openLookupModal() {
   const modal = getElementById('LookupModal');
   if (!backdrop || !modal) return;
 
-  // Reset to form view on each open
   showFormView();
   clearLookupError();
   clearResendFeedback();
@@ -215,7 +192,6 @@ function openLookupModal() {
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
 
-  // Focus first input
   setTimeout(() => {
     const emailInput = getElementById('LookupModal_EmailInput');
     if (emailInput) emailInput.focus();
@@ -231,7 +207,6 @@ function closeLookupModal() {
   modal.classList.remove('active');
   modal.setAttribute('aria-hidden', 'true');
 
-  // Clear any running countdown
   if (lockoutTimer) {
     clearInterval(lockoutTimer);
     lockoutTimer = null;
@@ -272,7 +247,6 @@ function showLockoutView(secondsRemaining) {
   if (formView) formView.style.display = 'none';
   if (lockoutView) lockoutView.classList.add('visible');
 
-  // Start countdown timer
   startLockoutCountdown(secondsRemaining);
 }
 
@@ -292,7 +266,7 @@ function startLockoutCountdown(seconds) {
     if (remaining <= 0) {
       clearInterval(lockoutTimer);
       lockoutTimer = null;
-      showFormView(); // Auto-return to form when lockout expires
+      showFormView();
     } else {
       updateTimerDisplay(timerEl, remaining);
     }
@@ -339,20 +313,19 @@ async function handleLookupSubmit() {
   const email = emailInput.value.trim();
   const orderReference = refInput.value.trim().toUpperCase();
 
-  // Basic client-side validation
   if (!email || !email.includes('@')) {
     showLookupError(t(currentLang, 'lookup.errorNotFound'));
     return;
   }
 
-  if (!orderReference || orderReference.length < 5) {
+  // Require 10 alphanumeric chars (dashes don't count toward length)
+  if (!orderReference || orderReference.replace(/-/g, '').length < 10) {
     showLookupError(t(currentLang, 'lookup.errorNotFound'));
     return;
   }
 
   clearLookupError();
 
-  // Show loading state
   if (submitBtn) {
     submitBtn.disabled = true;
     setText(submitBtn, t(currentLang, 'lookup.submittingBtn'));
@@ -368,7 +341,6 @@ async function handleLookupSubmit() {
     const data = await response.json();
 
     if (response.status === 429) {
-      // Locked out
       showLockoutView(data.secondsRemaining || 60);
       return;
     }
@@ -388,7 +360,6 @@ async function handleLookupSubmit() {
       return;
     }
 
-    // Success — render results
     renderResults(data, email, orderReference);
     showResultsView();
 
@@ -406,21 +377,15 @@ async function handleLookupSubmit() {
 // ─── Render Results ───────────────────────────────────────────
 
 function renderResults(data, email, orderReference) {
-  // Order reference badge
   const refEl = getElementById('LookupModal_OrderRef');
   if (refEl) refEl.textContent = data.orderReference || orderReference;
 
-  // Results title
   const titleEl = getElementById('LookupModal_ResultsTitle');
   if (titleEl) setText(titleEl, t(currentLang, 'lookup.resultsTitle'));
 
-  // Payment summary
   renderPaymentSummary(data.pricing);
-
-  // Ticket carousel
   renderCarousel(data.tickets);
 
-  // Store email+ref for resend
   const resendBtn = getElementById('LookupModal_ResendBtn');
   if (resendBtn) {
     resendBtn.dataset.email = email;
@@ -441,14 +406,12 @@ function renderPaymentSummary(pricing) {
     if (valueEl) setText(valueEl, value);
   };
 
-  // Show/hide female row
   const femaleRow = getElementById('LookupSummary_FemaleRow');
   if (femaleRow) {
     femaleRow.style.display = femaleQty > 0 ? 'flex' : 'none';
     setRow('LookupSummary_Female', `${t(currentLang, 'lookup.summaryFemale')} ×${femaleQty}`, `$${(femaleQty * 1).toFixed(2)} ${currency}`);
   }
 
-  // Show/hide male row
   const maleRow = getElementById('LookupSummary_MaleRow');
   if (maleRow) {
     maleRow.style.display = maleQty > 0 ? 'flex' : 'none';
@@ -469,7 +432,6 @@ function renderCarousel(tickets) {
   const slidesContainer = getElementById('LookupModal_CarouselSlides');
   if (!slidesContainer) return;
 
-  // Build slide HTML for each ticket
   slidesContainer.innerHTML = tickets.map((ticket, index) => {
     const isFemale = ticket.ticketType === 'female';
     const badgeClass = isFemale ? 'lookup-ticket-badge--female' : 'lookup-ticket-badge--male';
@@ -495,7 +457,6 @@ function renderCarousel(tickets) {
     `;
   }).join('');
 
-  // Build dots
   const dotsContainer = getElementById('LookupModal_CarouselDots');
   if (dotsContainer) {
     dotsContainer.innerHTML = tickets.map((_, index) => `
@@ -506,7 +467,6 @@ function renderCarousel(tickets) {
       ></button>
     `).join('');
 
-    // Attach dot click handlers
     dotsContainer.querySelectorAll('.lookup-carousel-dot').forEach((dot) => {
       on(dot, 'click', () => carouselGoTo(parseInt(dot.dataset.index, 10)));
     });
@@ -524,13 +484,11 @@ function carouselGoTo(index) {
 }
 
 function updateCarouselUI() {
-  // Move the slides
   const slidesContainer = getElementById('LookupModal_CarouselSlides');
   if (slidesContainer) {
     slidesContainer.style.transform = `translateX(-${carouselCurrentIndex * 100}%)`;
   }
 
-  // Update counter text
   const counterEl = getElementById('LookupModal_CarouselCounter');
   if (counterEl) {
     const text = t(currentLang, 'lookup.ticketCounter')
@@ -539,13 +497,11 @@ function updateCarouselUI() {
     setText(counterEl, text);
   }
 
-  // Update dots
   const dots = querySelectorAll('.lookup-carousel-dot');
   dots.forEach((dot, i) => {
     dot.classList.toggle('active', i === carouselCurrentIndex);
   });
 
-  // Update prev/next button disabled states
   const prevBtn = getElementById('LookupModal_CarouselPrev');
   const nextBtn = getElementById('LookupModal_CarouselNext');
   if (prevBtn) prevBtn.disabled = carouselCurrentIndex === 0;
@@ -571,11 +527,7 @@ async function handleResend() {
     const response = await fetch(`${CONFIG.BACKEND_URL}/api/tickets/resend`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        orderReference,
-        language: currentLang,
-      }),
+      body: JSON.stringify({ email, orderReference, language: currentLang }),
     });
 
     const data = await response.json();
@@ -632,7 +584,6 @@ function translateLookupModal(lang) {
     if (el && !el.disabled) setText(el, t(lang, key));
   });
 
-  // Placeholders
   const emailInput = getElementById('LookupModal_EmailInput');
   if (emailInput) emailInput.placeholder = t(lang, 'lookup.emailPlaceholder');
 
