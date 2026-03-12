@@ -118,23 +118,28 @@ function setupEventListeners() {
     });
   }
 
-  // FIX 4: Auto-dash — inserts '-' automatically after char 3 and char 7
+  // Auto-dash formatter: NMD-XXXX-XXXX
   const refInput = getElementById('LookupModal_RefInput');
   if (refInput) {
     on(refInput, 'input', () => {
-      // Strip non-alphanumeric, uppercase, cap at 11 to leave room for incoming char
-      const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 11);
+      const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 10);
 
-      let formatted = raw;
-      if (raw.length > 7) {
-        formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7, 11);
-      } else if (raw.length >= 3) {
-        formatted = raw.slice(0, 3) + '-' + raw.slice(3);
-      }
+    let formatted;
+    if (raw.length <= 3) {
+      formatted = raw;
+    } else if (raw.length <= 7) {
+      formatted = raw.slice(0, 3) + '-' + raw.slice(3);
+    } else {
+      formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7);
+    }
 
-      refInput.value = formatted;
-    });
-  }
+    const cursor = refInput.selectionStart;
+    const prevLen = refInput.value.length;
+    refInput.value = formatted;
+    const diff = formatted.length - prevLen;
+    refInput.setSelectionRange(cursor + diff, cursor + diff);
+  });
+}
 
   // FIX 2: Back button goes to home page
   const backBtn = getElementById('LookupModal_BackBtn');
