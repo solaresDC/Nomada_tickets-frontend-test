@@ -321,7 +321,6 @@
   max-width: 480px;
   max-height: 90vh;
   padding: var(--spacing-xl);
-  position: relative;         /* needed for close button positioning */
 }
 
 /* ── Lookup Form View ─────────────────────────────────────── */
