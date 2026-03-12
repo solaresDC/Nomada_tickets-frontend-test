@@ -126,8 +126,8 @@
               <button id="Page1_BuyTicketButton" class="btn btn-primary btn-lg">
                 Buy your ticket
               </button>
-              <button id="eventsButton" class="btn btn-secondary btn-lg">
-                Events
+              <button id="Page1_CheckTicketsButton" class="btn btn-secondary btn-lg">
+                Check your tickets
               </button>
             </div>
           </div>
@@ -233,6 +233,200 @@
   <!-- JavaScript -->
   <script type="module" src="js/main.js"></script>
   <script type="module" src="js/pages/index.js"></script>
+
+
+  <!-- Lookup Modal Backdrop -->
+<div id="LookupModal_Backdrop" class="modal-backdrop" role="presentation"></div>
+
+<!-- Lookup Modal -->
+<div
+  id="LookupModal"
+  class="modal modal-lookup"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="LookupModal_Title"
+  aria-hidden="true"
+>
+
+  <!-- Close Button (X) -->
+  <button id="LookupModal_CloseBtn" class="modal-close" aria-label="Close">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <!-- ── FORM VIEW ─────────────────────────────────────────── -->
+  <div id="LookupModal_FormView">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h2 id="LookupModal_Title" class="modal-title">Find Your Tickets</h2>
+      <p id="LookupModal_Subtitle" class="modal-text">Enter your details to retrieve your order.</p>
+    </div>
+
+    <!-- Error message (hidden until needed) -->
+    <div id="LookupModal_Error" class="lookup-error" role="alert" aria-live="polite">
+      <span class="lookup-error-icon">⚠</span>
+      <span id="LookupModal_ErrorText"></span>
+    </div>
+
+    <!-- Form -->
+    <form id="LookupModal_Form" novalidate>
+
+      <!-- Email field -->
+      <div class="lookup-field">
+        <label id="LookupModal_EmailLabel" class="lookup-label" for="LookupModal_EmailInput">
+          Email Address
+        </label>
+        <input
+          id="LookupModal_EmailInput"
+          class="lookup-input"
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          autocomplete="email"
+          required
+          inputmode="email"
+        />
+      </div>
+
+      <!-- Order Reference field -->
+      <div class="lookup-field">
+        <label id="LookupModal_RefLabel" class="lookup-label" for="LookupModal_RefInput">
+          Order Reference
+        </label>
+        <input
+          id="LookupModal_RefInput"
+          class="lookup-input lookup-input--ref"
+          type="text"
+          name="orderReference"
+          placeholder="NMD-XXXX-XXXX"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          maxlength="12"
+          required
+        />
+        <small id="LookupModal_RefHelper" class="lookup-label" style="text-transform:none; font-weight:normal; margin-top:4px; display:block; opacity:0.6;">
+          Found in your confirmation email.
+        </small>
+      </div>
+
+      <!-- Submit button -->
+      <button id="LookupModal_SubmitBtn" class="lookup-submit-btn" type="submit">
+        Find My Tickets
+      </button>
+
+    </form>
+  </div>
+  <!-- end form view -->
+
+  <!-- ── LOCKOUT VIEW ──────────────────────────────────────── -->
+  <div id="LookupModal_LockoutView" class="lookup-lockout" role="alert" aria-live="assertive">
+    <div class="lookup-lockout-icon">🔒</div>
+    <div id="LookupModal_LockoutTitle" class="lookup-lockout-title">Too many attempts</div>
+    <div id="LookupModal_LockoutMsg" class="lookup-lockout-message">Please wait before trying again.</div>
+    <div id="LookupModal_LockoutTimer" class="lookup-lockout-timer" aria-live="off">00:00</div>
+  </div>
+
+  <!-- ── RESULTS VIEW ──────────────────────────────────────── -->
+  <div id="LookupModal_ResultsView" class="lookup-results-view">
+
+    <!-- Results header -->
+    <div class="lookup-results-header">
+      <h3 id="LookupModal_ResultsTitle" class="lookup-results-title">Your Tickets</h3>
+      <span id="LookupModal_OrderRef" class="lookup-order-ref">NMD-XXXX-XXXX</span>
+    </div>
+
+    <!-- Payment Summary -->
+    <div class="lookup-summary">
+      <div id="LookupSummary_Title" class="lookup-summary-title">Order Summary</div>
+
+      <div id="LookupSummary_FemaleRow" class="lookup-summary-row">
+        <span id="LookupSummary_Female_Label">Women tickets</span>
+        <span id="LookupSummary_Female_Value">—</span>
+      </div>
+
+      <div id="LookupSummary_MaleRow" class="lookup-summary-row">
+        <span id="LookupSummary_Male_Label">Men tickets</span>
+        <span id="LookupSummary_Male_Value">—</span>
+      </div>
+
+      <div class="lookup-summary-row">
+        <span id="LookupSummary_Subtotal_Label">Subtotal</span>
+        <span id="LookupSummary_Subtotal_Value">—</span>
+      </div>
+
+      <div class="lookup-summary-row">
+        <span id="LookupSummary_Fee_Label">Processing fee</span>
+        <span id="LookupSummary_Fee_Value">—</span>
+      </div>
+
+      <div class="lookup-summary-row lookup-summary-row--total">
+        <span id="LookupSummary_Total_Label">Total</span>
+        <span id="LookupSummary_Total_Value">—</span>
+      </div>
+    </div>
+
+    <!-- Ticket Carousel -->
+    <div class="lookup-carousel">
+
+      <!-- Prev button -->
+      <button
+        id="LookupModal_CarouselPrev"
+        class="lookup-carousel-btn lookup-carousel-btn--prev"
+        aria-label="Previous ticket"
+        disabled
+      >&#8249;</button>
+
+      <!-- Slides track -->
+      <div id="LookupModal_CarouselTrack" class="lookup-carousel-track">
+        <div id="LookupModal_CarouselSlides" class="lookup-carousel-slides">
+          <!-- Slides injected by JS -->
+        </div>
+      </div>
+
+      <!-- Next button -->
+      <button
+        id="LookupModal_CarouselNext"
+        class="lookup-carousel-btn lookup-carousel-btn--next"
+        aria-label="Next ticket"
+      >&#8250;</button>
+
+      <!-- Counter: "1 of 3" -->
+      <div id="LookupModal_CarouselCounter" class="lookup-carousel-counter" aria-live="polite">
+        1 of 1
+      </div>
+
+      <!-- Dots navigation -->
+      <div id="LookupModal_CarouselDots" class="lookup-carousel-dots" role="tablist" aria-label="Ticket navigation">
+        <!-- Dots injected by JS -->
+      </div>
+
+    </div>
+    <!-- end carousel -->
+
+    <!-- Resend section -->
+    <div class="lookup-resend-section">
+      <button id="LookupModal_ResendBtn" class="lookup-resend-btn" type="button">
+        ✉ Resend to my email
+      </button>
+      <div id="LookupModal_ResendFeedback" class="lookup-resend-feedback" aria-live="polite"></div>
+    </div>
+
+    <!-- Back to search -->
+    <button id="LookupModal_BackBtn" class="lookup-back-btn" type="button">
+      ← Back to search
+    </button>
+
+  </div>
+  <!-- end results view -->
+
+</div>
+<!-- end lookup modal -->
   
+
+
 </body>
 </html>
