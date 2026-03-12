@@ -104,7 +104,16 @@ a {
   }
 }
 
-/* Enable touch interactions */
+/* Disable zoom, double-tap, and text selection */
 * {
   touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Keep inputs and textareas typeable */
+input,
+textarea {
+  -webkit-user-select: text;
+  user-select: text;
 }
