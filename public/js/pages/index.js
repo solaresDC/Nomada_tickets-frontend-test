@@ -127,7 +127,7 @@ function setupEventListeners() {
     let formatted;
     if (raw.length < 3) {
       formatted = raw;
-    } else if (raw.length <= 7) {
+    } else if (raw.length < 7) {
       formatted = raw.slice(0, 3) + '-' + raw.slice(3);
     } else {
       formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7);
