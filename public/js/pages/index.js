@@ -137,9 +137,12 @@ if (refInput) {
       const cursor = refInput.selectionStart;
       const prevLen = refInput.value.length;
       refInput.value = formatted;
-      const newPos = cursor + (formatted.length - prevLen);
-      refInput.setSelectionRange(newPos, newPos);
+      const diff = formatted.length - prevLen;
+      if (diff > 0) {
+        refInput.setSelectionRange(cursor + diff, cursor + diff);
+      }
     }
+
   });
 }
 
