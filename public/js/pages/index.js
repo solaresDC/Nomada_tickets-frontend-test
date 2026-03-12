@@ -118,12 +118,16 @@ function setupEventListeners() {
     });
   }
 
-  // Auto-dash formatter: NMD-XXXX-XXXX
-  const refInput = getElementById('LookupModal_RefInput');
-  if (refInput) {
+// Auto-dash formatter: NMD-XXXX-XXXX
+const refInput = getElementById('LookupModal_RefInput');
+if (refInput) {
+  let isDeleting = false;
+  on(refInput, 'keydown', (e) => {
+    isDeleting = e.key === 'Backspace' || e.key === 'Delete';
+  });
   on(refInput, 'input', () => {
+    if (isDeleting) return;
     const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 11);
-
     let formatted;
     if (raw.length < 3) {
       formatted = raw;
@@ -132,12 +136,7 @@ function setupEventListeners() {
     } else {
       formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7);
     }
-
-    const cursor = refInput.selectionStart;
-    const prevLen = refInput.value.length;
     refInput.value = formatted;
-    const diff = formatted.length - prevLen;
-    refInput.setSelectionRange(Math.max(0, cursor + diff), Math.max(0, cursor + diff));
   });
 }
 
