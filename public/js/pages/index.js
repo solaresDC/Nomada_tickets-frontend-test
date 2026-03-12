@@ -125,7 +125,7 @@ function setupEventListeners() {
       const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase().slice(0, 10);
 
     let formatted;
-    if (raw.length <= 3) {
+    if (raw.length < 3) {
       formatted = raw;
     } else if (raw.length <= 7) {
       formatted = raw.slice(0, 3) + '-' + raw.slice(3);
