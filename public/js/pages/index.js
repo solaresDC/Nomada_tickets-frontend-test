@@ -135,13 +135,28 @@ function setupEventListeners() {
     });
   }
 
-  // Auto-uppercase the reference input as user types
+  // Auto-uppercase + auto-dash the reference input as user types
+  // Formats raw input into NMD-XXXX-XXXX as the user types
   const refInput = getElementById('LookupModal_RefInput');
   if (refInput) {
     on(refInput, 'input', () => {
-      const pos = refInput.selectionStart;
-      refInput.value = refInput.value.toUpperCase();
-      refInput.setSelectionRange(pos, pos);
+      // Strip everything except letters and digits, uppercase
+      const raw = refInput.value.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+
+      // Format as NMD-XXXX-XXXX
+      // Characters 0-2  → "NMD"
+      // Characters 3-6  → "-XXXX"
+      // Characters 7-10 → "-XXXX"
+      let formatted = '';
+      if (raw.length <= 3) {
+        formatted = raw;
+      } else if (raw.length <= 7) {
+        formatted = raw.slice(0, 3) + '-' + raw.slice(3);
+      } else {
+        formatted = raw.slice(0, 3) + '-' + raw.slice(3, 7) + '-' + raw.slice(7, 11);
+      }
+
+      refInput.value = formatted;
     });
   }
 
