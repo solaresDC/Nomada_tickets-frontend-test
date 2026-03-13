@@ -73,3 +73,14 @@
   width: 20px;
   height: 20px;
 }
+
+.footer-support {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 6px;
+}
+
+.footer-support a {
+  color: var(--color-accent-cyan);
+  text-decoration: underline;
+}
