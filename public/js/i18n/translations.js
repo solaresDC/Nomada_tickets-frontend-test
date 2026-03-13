@@ -97,7 +97,7 @@ export const translations = {
 
     footer: {
       copyright: '© 2026 Nómada. All rights reserved.',
-      support: 'Need support? Contact us at nomada.events.to@gmail.com'
+      support: 'Need support? Contact us at'
     },
 
     lookup: {
@@ -227,7 +227,7 @@ export const translations = {
 
     footer: {
       copyright: '© 2026 Nómada. Todos los derechos reservados.',
-      support: '¿Necesitas soporte? Contáctanos en nomada.events.to@gmail.com'
+      support: '¿Necesitas soporte? Contáctanos en'
     },
 
     lookup: {
@@ -357,7 +357,7 @@ export const translations = {
 
     footer: {
       copyright: '© 2026 Nómada. Todos os direitos reservados.',
-      support: 'Precisa de suporte? Entre em contato: nomada.events.to@gmail.com'
+      support: 'Precisa de suporte? Entre em contato:'
     },
 
     lookup: {
