@@ -96,7 +96,8 @@ export const translations = {
     },
 
     footer: {
-      copyright: '© 2026 Nómada. All rights reserved.'
+      copyright: '© 2026 Nómada. All rights reserved.',
+      support: 'Need help? Contact us at nomada.events.to@gmail.com'
     },
 
     lookup: {
@@ -225,7 +226,8 @@ export const translations = {
     },
 
     footer: {
-      copyright: '© 2026 Nómada. Todos los derechos reservados.'
+      copyright: '© 2026 Nómada. Todos los derechos reservados.',
+      support: '¿Necesitas ayuda? Contáctanos en nomada.events.to@gmail.com'
     },
 
     lookup: {
@@ -354,7 +356,8 @@ export const translations = {
     },
 
     footer: {
-      copyright: '© 2026 Nómada. Todos os direitos reservados.'
+      copyright: '© 2026 Nómada. Todos os direitos reservados.',
+      support: 'Precisa de ajuda? Entre em contato: nomada.events.to@gmail.com'
     },
 
     lookup: {

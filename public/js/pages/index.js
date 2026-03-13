@@ -68,10 +68,13 @@ function applyTranslations(lang) {
     if (desc) setText(desc, t(lang, descKey));
   });
 
-  const copyright = getElementById('Page1_CopyrightText');
-  if (copyright) setText(copyright, t(lang, 'footer.copyright'));
+const copyright = getElementById('Page1_CopyrightText');
+if (copyright) setText(copyright, t(lang, 'footer.copyright'));
 
-  translateLookupModal(lang);
+const supportText = getElementById('Page1_SupportText');
+if (supportText) supportText.innerHTML = `${t(lang, 'footer.support')} <a href="mailto:nomada.events.to@gmail.com">nomada.events.to@gmail.com</a>`;
+
+translateLookupModal(lang);
 }
 
 // ─── Event Listeners ──────────────────────────────────────────
